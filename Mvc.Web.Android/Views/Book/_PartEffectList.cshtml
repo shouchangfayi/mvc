@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+@{
+    var List = Model.Item1;
+
+    if (List != null && List.Count > 0)
+    {
+    <a href="/Info_OLD?bookid=@(List[0].Id)">
+        <div class="pic_txt">
+            <div class="picbox bookpic">
+                <img src="http://images.xxsy.net/bimg/@(List[0].Id).jpg" />
+                @if (List[0].Status == "已完成")
+                {
+                    <div class="poplabel end"></div>
+                }
+            </div>
+            <ul class="txtbox">
+                <li>
+                    <p class="bookname">@(List[0].Title)</p>
+                </li>
+                <li>
+                    <p class="category _@(List[0].ClassId)">@(List[0].ClassName)</p>
+                    <p class="author">@(Model.Item3 == 1 ? List[0].AuthorName : List[0].Author)</p>
+                </li>
+                <li class="book_info">@(Model.Item2)</li>
+            </ul>
+        </div>
+    </a>  
+    
+    <ul class="item_list">
+        @for (int i = 1; i < List.Count; i++)
+        {
+            <li><span class="category _@(List[i].ClassId)">@(List[i].ClassName)</span><a href="/Info_OLD?bookid=@(List[i].Id)">@(List[i].Title)</a><span class="author">@(Model.Item3 == 1 ? List[i].AuthorName : List[i].Author)</span></li>
+        }
+    </ul>
+    }
+}

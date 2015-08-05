@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "榜单页";
+    var _size = 6;
+}
+
+@section styles{
+    @Styles.Render("~/Content/css/css.css")
+}
+
+<div class="item_box">
+    <div class="tab" id="orderlist">
+        <ul class="tabs" id="bankType">
+            <li>
+                <a data-index="1" data-value="@((int)RankingClass.Mon)" class="current">月票榜</a>
+                <a data-index="0" data-value="@((int)RankingClass.Jewel)">钻石榜</a>
+                <a data-index="0" data-value="@((int)RankingClass.Flower)">鲜花榜</a>
+                <a data-index="0" data-value="@((int)RankingClass.VipSomeDay)">畅销榜</a>
+            </li>
+        </ul>
+        <div class="tab_content">
+            <div class="tabs_item">
+                <div class="item_list" id="rank@((int)RankingClass.Mon)">
+                    @Html.Action("GetRankings", "Book", new { rankingtype = (int)RankingClass.Mon, index = 0, size = _size })
+                </div>
+            </div>
+            <div class="tabs_item">
+                <div class="item_list" id="rank@((int)RankingClass.Jewel)"></div>
+            </div>
+            <div class="tabs_item">
+                <div class="item_list" id="rank@((int)RankingClass.Flower)"></div>
+            </div>
+            <div class="tabs_item">
+                <div class="item_list" id="rank@((int)RankingClass.VipSomeDay)"></div>
+            </div>
+            <a id="lnkMore" class="nomorelist" onclick="getNextBank();">
+                <p>点击查看更多</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var _isLoading = 0;
+        var _size = @(_size);
+        var $current = $("#bankType > li .current");
+        var _index = parseInt($current.attr("data-index"));
+        var _rankingtype = parseInt($current.attr("data-value"));
+        var _timer;
+
+        var getBank = function (callback) {
+            $("#lnkMore > p").addClass("ldg").html("正在加载....");
+            $current = $("#bankType > li .current");
+            _index = parseInt($current.attr("data-index"));
+            _rankingtype = parseInt($current.attr("data-value"));
+
+            $.get('@Url.Action("GetRankings", "Book")', $.param({ rankingtype: _rankingtype, index: _index, size: _size }),
+                function (response) {
+                    _isLoading = 0;
+                    $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                    _index++;
+                    $current.attr("data-index", _index);
+
+                    if (response != "")
+                        $("#rank" + _rankingtype).append(response);
+
+                    if (typeof callback == "function")
+                        callback();
+                });
+        }
+
+        // 获取榜单下一页数据
+        var getNextBank = function () {
+            if (_isLoading == 1)
+                return;
+            _isLoading = 1;
+            getBank();
+        }
+
+        $(function () {
+            _timer = setInterval(function () {
+                if (_isLoading == 1)
+                    return;
+
+                if ($(window).height() + $(window).scrollTop() > $("#lnkMore > p").offset().top) {
+                    $current = $("#bankType > li .current");
+                    _index = parseInt($current.attr("data-index"));
+                    _rankingtype = parseInt($current.attr("data-value"));
+
+                    if (_index < 6)
+                        getNextBank();
+                }
+            }, 200);
+        });
+    </script>
+
+    @Scripts.Render("~/Scripts/index.js")
+}

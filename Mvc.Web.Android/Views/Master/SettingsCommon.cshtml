@@ -1,0 +1,33 @@
+﻿<script type="text/javascript">
+    var _verXxsy = "1CBB88DB41FD7250";
+    try {
+        _verXxsy = XiaoXiangJS.getVersion2();
+    } catch (e)
+    { }
+    if (_verXxsy != "") {
+        Util.CookieWrite("VerXxsy", _verXxsy, 999);
+    }
+
+    var authId = "";
+    try {
+        authId = XiaoXiangJS.getDeviceId();
+    } catch (e) { }
+    if (authId != "") {
+        Util.CookieWrite("AUTH_ID", authId, 999);
+    }
+
+</script>
+
+<div id="tongji" style="display: none;">
+    <img src="@(NapiService.WebHelper.CNZZ("1253411501"))" width="0" height="0"/>
+</div>
+
+<div style="
+	line-height:50px; 
+	font-size:14px; 
+	color:#f00; 
+	text-align:center;
+	width:95%;
+	margin:0 auto;
+    display:none;
+	border:1px solid #f00;">内网接口</div>

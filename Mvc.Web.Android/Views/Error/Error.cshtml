@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "错误提示";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/> 
+    <title>错误提示</title>   
+</head>
+<body>    
+
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        .error-section {
+            text-align:center; margin-top:60px;
+        }
+        .error-section img {
+            border:none;
+        }
+        .error-section > div {
+            padding-top:20px;
+        }
+        .error-section p {
+            font-size:14px; color:#999; 
+            line-height:170%;
+        }
+        .error-section a {
+            color:#999; text-decoration:underline;
+        }
+    </style>
+     
+    <section class="error-section">
+        <img src="~/css/images/error.png" />
+        <div>
+            <p>您所访问的页面发生了错误！</p>
+            <p><a href="/">系统<span id="time">3</span>秒后自动跳转至首页,如果未能自动跳转请点击这里....</a></p>
+        </div>     
+    </section>
+
+    <script type="text/javascript">
+
+        var delay = 3;
+        var timer;
+
+        window.onload = function () {
+            timer = setInterval(function () {
+                if (delay < 0) {
+                    location.href = "/";
+                    clearInterval(timer);
+                    return;
+                }
+                document.getElementById("time").innerHTML = delay--;
+            }, 1000);
+        }
+
+    </script> 
+
+</body>
+</html>

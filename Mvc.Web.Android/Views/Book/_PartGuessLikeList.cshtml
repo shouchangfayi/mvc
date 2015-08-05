@@ -1,0 +1,19 @@
+﻿@model List<NapiService.Model.Bookeffect>
+@{
+    Layout = null;
+}
+@foreach (var item in Model)
+{
+    <li>
+        <div class="bookpic">
+            <a href="/Info_OLD?bookid=@(item.Id)">
+                <img src="http://images.xxsy.net/bimg/@(item.Id).jpg" /></a>
+            @if (item.Status == "已完成")
+            {
+                <div class="poplabel end"></div>
+            }
+        </div>
+        <h2>@(item.Title)</h2>
+        <p class="author">@(item.AuthorName)</p>
+    </li>
+}

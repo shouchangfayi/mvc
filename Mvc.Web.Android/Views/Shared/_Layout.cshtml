@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/Scripts/jquery.min.js")
+    @Scripts.Render("~/Script/Mobile/jquery.mobile.custom.min.js")
+    @Scripts.Render("~/Script/JX.js")
+    @Styles.Render("~/Content/css/style.css")
+    @RenderSection("styles", required: false)
+    <script>
+        function __fn() {
+            var tempW = 750;
+            var size = parseInt($(window).width() * 100 / tempW);
+            var html = $('html').eq(0);
+            $(html).css({ fontSize: size + 'px' });
+        }
+        __fn();
+        window.onresize = function () { __fn(); }
+    </script>
+</head>
+<body>
+    @RenderBody()
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

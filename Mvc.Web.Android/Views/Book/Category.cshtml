@@ -1,0 +1,260 @@
+﻿@using Mvc.Web.Android.Models.Book;
+@model CategoryModel
+@{
+    ViewBag.Title = "分类页";
+}
+@section styles{
+    @Styles.Render("~/Content/css/css.css")
+    @Styles.Render("~/Content/css/floatbtn.css")
+}
+<div class="item_box" id="orderlist">
+    <div class="tab_content">
+        <div class="item_list" id="books">
+            @Html.Action("GetCategoryView", "Book", new { classid = (int)Model.Type, sort = (int)Model.Sort, index = 0, size = 10 })
+        </div>
+        <a id="lnkMore" class="nomorelist" onclick="getNextBook();">
+            <p>点击查看更多</p>
+        </a>
+    </div>
+</div>
+<!-- 浮动区  -->
+<div class="up"><a href="javascript:;" class="floatbtn btn_up" id="_goTop">&nbsp;</a></div>
+<div class="rightbtn">
+    <ul>
+        <li><a href="javascript:;" class="floatbtn btn_hot" id="hotnav_current">最新</a>
+            <div class="popnav" id="hot_nav">
+                <ul>
+                    <li><a href="javascript:;" data-index="0" data-sort="@((int)CategorySort.Hot)" class="@(Model.Sort == CategorySort.Hot ? "current_sort" : "")">热门</a></li>
+                    <li><a href="javascript:;" data-index="1" data-sort="@((int)CategorySort.New)" class="@(Model.Sort == CategorySort.New ? "current_sort" : "")">最新</a></li>
+                    <li><a href="javascript:;" data-index="2" data-sort="@((int)CategorySort.Finished)" class="@(Model.Sort == CategorySort.Finished ? "current_sort" : "")">完结</a></li>
+                    <li><a href="javascript:;" data-index="3" data-sort="@((int)CategorySort.SpecialOffer)" class="@(Model.Sort == CategorySort.SpecialOffer ? "current_sort" : "")">特价</a></li>
+                    <li><a href="javascript:;" data-index="4" data-sort="@((int)CategorySort.Free)" class="@(Model.Sort == CategorySort.Free ? "current_sort" : "")">免费</a></li>
+                    <li class="arrowdown"></li>
+                </ul>
+            </div>
+        </li>
+        <li><a href="javascript:;" class="floatbtn btn_allsort" id="sortnav_current">全部类别</a>
+            <div class="popnav morethan10" id="sort_nav">
+                <ul>
+                    <li><a href="javascript:;" data-index="0" data-class="@((int)CategoryClass.None)" class="@(Model.Type == CategoryClass.None ? "current_sort" : "")">全部</a></li>
+                    <li><a href="javascript:;" data-index="1" data-class="@((int)CategoryClass.PassThrough)" class="@(Model.Type == CategoryClass.PassThrough ? "current_sort" : "")">穿越</a></li>
+                    <li><a href="javascript:;" data-index="2" data-class="@((int)CategoryClass.Aerial)" class="@(Model.Type == CategoryClass.Aerial ? "current_sort" : "")">架空</a></li>
+                    <li><a href="javascript:;" data-index="3" data-class="@((int)CategoryClass.Urban)" class="@(Model.Type == CategoryClass.Urban ? "current_sort" : "")">都市</a></li>
+                    <li><a href="javascript:;" data-index="4" data-class="@((int)CategoryClass.PowerfulFamily)" class="@(Model.Type == CategoryClass.PowerfulFamily ? "current_sort" : "")">豪门</a></li>
+                    <li><a href="javascript:;" data-index="5" data-class="@((int)CategoryClass.Youth)" class="@(Model.Type == CategoryClass.Youth ? "current_sort" : "")">青春</a></li>
+                    <li><a href="javascript:;" data-index="6" data-class="@((int)CategoryClass.Magical)" class="@(Model.Type == CategoryClass.Magical ? "current_sort" : "")">魔幻</a></li>
+                    <li><a href="javascript:;" data-index="7" data-class="@((int)CategoryClass.Occult)" class="@(Model.Type == CategoryClass.Occult ? "current_sort" : "")">玄幻</a></li>
+                    <li><a href="javascript:;" data-index="8" data-class="@((int)CategoryClass.Ability)" class="@(Model.Type == CategoryClass.Ability ? "current_sort" : "")">异能</a></li>
+                    <li><a href="javascript:;" data-index="9" data-class="@((int)CategoryClass.History)" class="@(Model.Type == CategoryClass.History ? "current_sort" : "")">历史</a></li>
+                    <li><a href="javascript:;" data-index="10" data-class="@((int)CategoryClass.Monthly)" class="@(Model.Type == CategoryClass.Monthly ? "current_sort" : "")">包月</a></li>
+                    <li class="arrowdown"></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script>
+        var _isLoading = 0, _index = 0, _size = 10;
+        var _cid = $("#sort_nav .current_sort").attr("data-class");
+        var _sort = $("#hot_nav .current_sort").attr("data-sort");
+        var _index_X = $("#hot_nav .current_sort").attr("data-index");
+        var _index_Y = $("#sort_nav .current_sort").attr("data-index");
+        var _timer;
+        var _books = [];
+        $("#hot_nav a").each(function () {
+            var _booklist = [];
+            $("#sort_nav a").each(function () {
+                _booklist.push({ index: 0, nomore: false, items: [] });
+            })
+            _books.push(_booklist);
+        });
+        _books[_index_X][_index_Y].index = 1;
+        _books[_index_X][_index_Y].items.push($("#books").html());
+        $("#hotnav_current").html($("#hot_nav .current_sort").html());
+        $("#sortnav_current").html($("#sort_nav .current_sort").html() == "全部" ? "全部类别" : $("#sort_nav .current_sort").html());
+
+        //history 处理
+        var _state = {
+            cidIndex: _index_Y,
+            sortIndex: _index_X
+        }
+        history.replaceState(_state, "title", document.URL);
+
+        var getBooks = function (callback) {
+            $.get('@Url.Action("GetCategoryView", "Book")', $.param({ classid: _cid, sort: _sort, index: _index, size: _size }),
+                function (response) {
+                    _isLoading = 0;
+
+                    _books[_index_X][_index_Y].index = _index;
+                    if (response != "") {
+                        _books[_index_X][_index_Y].items.push(response);
+                        $("#books").append(response);
+                        if ($(".pic_txt[data-total]").length > 0) {
+                            _books[_index_X][_index_Y].nomore = true;
+                            $("#lnkMore > p").removeClass("ldg").addClass("nomore").html("没有更多了！");
+                        }
+                    }
+                    else {
+                        _books[_index_X][_index_Y].nomore = true;
+                        $("#lnkMore > p").removeClass("ldg").addClass("nomore").html("没有更多了！");
+                    }
+
+                    if (typeof callback == "function")
+                        callback();
+                });
+        };
+
+        var getNextBook = function () {
+            if (_isLoading == 1) return;
+            if (_books[_index_X][_index_Y].nomore) return;
+            _isLoading = 1;
+            _index++;
+            $("#lnkMore > p").addClass("ldg").html("正在加载...");
+            getBooks(function () {
+                if (_books[_index_X][_index_Y].nomore) {
+                    $("#lnkMore > p").removeClass("ldg").html("没有更多了");
+                }
+                else {
+                    $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                }
+                _isLoading = 0;
+            });
+        }
+
+        $(function () {
+            $(".popnav a").click(function () {
+                if (_isLoading == 1) return;
+                $("body").scrollTop(0);
+                if ($("#sort_nav a").index(this) >= 0) {
+                    $("#sort_nav a").removeClass("current_sort");
+                    $(this).addClass("current_sort");
+                    $("#sortnav_current").html(this.innerHTML == "全部" ? "全部类别" : this.innerHTML);
+                    _cid = $("#sort_nav .current_sort").attr("data-class");
+                    _index_Y = $("#sort_nav .current_sort").attr("data-index");
+                }
+                else {
+                    $("#hot_nav a").removeClass("current_sort");
+                    $(this).addClass("current_sort");
+                    $("#hotnav_current").html(this.innerHTML);
+                    _sort = $("#hot_nav .current_sort").attr("data-sort");
+                    _index_X = $("#hot_nav .current_sort").attr("data-index");
+                }
+                _index = _books[_index_X][_index_Y].index;
+                $("#books").html(_books[_index_X][_index_Y].items.join(""));
+                if (_books[_index_X][_index_Y].nomore == true) {
+                    $("#lnkMore > p").addClass("nomore").html("没有更多了！");
+                } else {
+                    $("#lnkMore > p").removeClass("nomore").html("点击查看更多");
+                }
+
+                if (_index == 0 && _books[_index_X][_index_Y].items.length == 0) {
+                    _isLoading = 1;
+                    $("#lnkMore > p").addClass("ldg").html("正在加载...");
+                    //Util.Loading();
+                    getBooks(function () {
+                        _isLoading = 0;
+                        if (_books[_index_X][_index_Y].nomore) {
+                            $("#lnkMore > p").removeClass("ldg").html("没有更多了");
+                        }
+                        else {
+                            $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                        }
+                        //Util.LoadingClear();
+                    });
+                }
+
+                //history 处理
+                var _state = {
+                    cidIndex: _index_Y,
+                    sortIndex: _index_X
+                }
+                history.pushState(_state, "titl", document.URL);
+            });
+
+            $("#hotnav_current").click(function (event) {
+                $("#sort_nav").removeClass("clicked");
+                if ($("#hot_nav").hasClass("clicked")) {
+                    $("#hot_nav").removeClass("clicked");
+                }
+                else {
+                    $("#hot_nav").addClass("clicked");
+                }
+                event.stopPropagation();
+            });
+
+            $("#sortnav_current").click(function (event) {
+                $("#hot_nav").removeClass("clicked");
+                if ($("#sort_nav").hasClass("clicked")) {
+                    $("#sort_nav").removeClass("clicked");
+                }
+                else {
+                    $("#sort_nav").addClass("clicked");
+                }
+                event.stopPropagation();
+            });
+
+            _timer = setInterval(function () {
+                if (_isLoading == 1) return;
+                if ($(window).height() + $(window).scrollTop() > $("#lnkMore > p").offset().top) {
+                    if (!_books[_index_X][_index_Y].nomore && _index < 6)
+                        getNextBook();
+                }
+            }, 200);
+
+            $("#_goTop").click(function () {
+                $("body").animate({ scrollTop: 0 }, 200);
+            });
+
+            $(document).click(function () {
+                $(".popnav").removeClass("clicked");
+            });
+
+            //setInterval(function () {
+            //    var top = $("body").scrollTop();
+            //    top > 10 ? $("#_goTop").show() : $("#_goTop").hide();
+            //}, 200);
+
+        });
+
+        window.onpopstate = function (evt) {
+            if (_isLoading == 1) return;
+            if (evt.state) {
+                $(".popnav").removeClass("clicked");
+                _index_X = evt.state.sortIndex;
+                _index_Y = evt.state.cidIndex;
+                $(".popnav a").removeClass("current_sort");
+                var $cidcurrent = $("#hot_nav a[data-index=" + _index_X + "]");
+                var $sortcurrent = $("#sort_nav a[data-index=" + _index_Y + "]");
+                $cidcurrent.addClass("current_sort");
+                $sortcurrent.addClass("current_sort");
+                $("#hotnav_current").html($cidcurrent.html());
+                $("#sortnav_current").html($sortcurrent.html() == "全部" ? "全部类别" : $sortcurrent.html());
+
+                _index = _books[_index_X][_index_Y].index;
+                $("#books").html(_books[_index_X][_index_Y].items.join(""));
+
+                if (_index == 0 && _books[_index_X][_index_Y].items.length == 0) {
+                    _isLoading = 1;
+                    _cid = $sortcurrent.attr("data-class");
+                    _sort = $cidcurrent.attr("data-sort");
+                    $("#lnkMore > p").addClass("ldg").html("正在加载...");
+                    //Util.Loading();
+                    getBooks(function () {
+                        _isLoading = 0;
+                        if (_books[_index_X][_index_Y].nomore) {
+                            $("#lnkMore > p").removeClass("ldg").html("没有更多了");
+                        }
+                        else {
+                            $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                        }
+                        //Util.LoadingClear();
+                    });
+                }
+            }
+        }
+
+        @*location.replace('@Url.Action("MianFei", "Book")');*@
+    </script>
+}

@@ -1,0 +1,249 @@
+﻿*{ margin:0; padding:0;-webkit-tap-highlight-color:rgba(255, 0, 0, 0);}
+html, body, * { font-family:Microsoft YaHei,MicrosoftJhengHei,STHeiti,MingLiu ! important; letter-spacing:0;}
+body{ background:#f4f4f4; }
+h1{ font-size:0.34rem; font-weight:500; color:#666; white-space:nowrap;}
+h2{ font-size:0.32rem; font-weight:500; color:#333; white-space:nowrap;}
+p{ font-size:0.24rem;}
+a{ text-decoration:none;}
+img{ border:none;}
+li{ list-style:none; list-style-position:inside;}
+strong{ display:block; font-size:0.26rem; color:#ff6000; text-align:center;}
+.category{ margin-right:0.1rem; padding:.02rem 0; width:0.8rem; text-align: center; font-size:0.2rem; color:#666; border-radius:0.3rem;}
+._1{ background:#a8c7f3;}
+._2{ background:#c1effe;}
+._3{ background:#fcebb6;}
+._4{ background:#ffcffa;}
+._5{ background:#d9f7c8;}
+._6{ background:#dbd6f5;}
+._7{ background:#c1f5e8;}
+._8{ background:#cdb5ff;}
+._9{ background:#ffc7ab;}
+._10{ background:#feb2bb;}
+._11{ background:#fffca4;}
+.bookpic{ position:relative; display:inline-block;}
+.poplabel{ position:absolute; left:-0.05rem; top:-0.05rem; width:1rem; height:1rem; z-index:5;}
+.end{ background:url(../images/pic.png) no-repeat 0 -6.1rem; background-size:1rem auto;}
+.clear{ clear:both;}
+
+.banner{ background:#eafaff; height:2rem; overflow:hidden;}
+.banner img{ height:2rem;}
+.note{ padding-left:0.7rem; height:0.78rem; background:#f4f4f4 url(../images/pic.png) no-repeat 0 0.02rem; background-size:1rem auto; border-width:1px 0 0 0; border-style:solid; border-color:#e5e5e5; color:#ff6000; font-size:0.26rem; font-weight: bold; word-spacing:1rem; line-height:0.8rem; }
+
+.item_box{ margin-bottom:0.15rem; padding:0.05rem 0; background:#fff; border-top:1px solid #e5e5e5; border-bottom:1px solid #e5e5e5;}
+div.item_box:last-child{ border:none; margin-bottom:0;}
+.item_title{ display:-webkit-box; -webkit-box-align:center; padding-left:0.3rem; height:0.8rem; background: url(../images/pic.png) no-repeat 0 -0.8rem; background-size:1rem auto; }
+.item_title > h1{ -webkit-box-flex:1;}
+.item_title > .tit_more{ display:block; width:1.2rem; background: url(../images/pic.png) no-repeat 0.6rem -1.65rem; background-size:1rem auto; }
+.item_title > .tit_more > a{ color:#999; font-size:0.28rem;}
+
+.pic_txt{ display:-webkit-box; -webkit-box-align:center; padding:0.05rem 0.3rem; height:2.6rem; overflow:hidden;}
+.pic_txt .picbox{ width:2rem; float: left;}
+.pic_txt .picbox img{ width:1.65rem; height:2.2rem;  border:1px solid #CCC;}
+.pic_txt .picboxsmall{ width:1.5rem;} 
+.pic_txt .picboxsmall img{width:1.2rem; height:1.7rem;  border:2px solid #CCC;}
+.pic_txtauto{ height: auto;}
+
+.txtbox{ -webkit-box-flex:1; overflow:hidden;}
+.txtbox li{ display:-webkit-box; -webkit-box-align:center;}
+.txtbox li .bookname{ -webkit-box-flex:1; margin-bottom:0.15rem; font-size:0.32rem; height:0.32rem; line-height:0.32rem; color:#333; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; }
+.txtbox li .order_number{ width:0.3rem; height:0.3rem; background:#ff4436; color:#fff; font-size:0.2rem; text-align:center; line-height:0.3rem;}
+.txtbox li .author{ -webkit-box-flex:1; font-size:0.28rem; color:#666; line-height:0.4rem; height:0.4rem; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; }
+.txtbox li .orderico{ width:1.5rem; text-align:right; letter-spacing:0; color:#999; font-size:0.28rem; font-weight:normal; white-space:nowrap; }
+.txtbox li p.ticket:after {
+        content:""; display:inline-block; width:.34rem; height:.32rem; background: url(../images/pic.png) no-repeat; background-position:0 -2.26rem; background-size:1rem auto;
+    }/*月票*/
+.txtbox li p.diamend:after {
+        content:""; display:inline-block; width:.34rem; height:.32rem; background: url(../images/pic.png) no-repeat; background-position:0 -2.76rem; background-size:1rem auto;
+    }/*钻石*/
+.txtbox li p.flower:after {
+        content:""; display:inline-block; width:.34rem; height:.32rem; background: url(../images/pic.png) no-repeat; background-position:0 -3.26rem; background-size:1rem auto;
+    }/*鲜花*/
+.txtbox li p.sellwell:after {
+        content:""; display:inline-block; width:.34rem; height:.32rem; background: url(../images/pic.png) no-repeat; background-position:0 -3.76rem; background-size:1rem auto;
+    }/*畅销*/
+.txtbox li p.read{ color:#ff6000;}
+.txtbox li p.read:before {
+        content:""; display:inline-block; width:.34rem; height:.35rem; background: url(../images/pic.png) no-repeat; background-position:0 -4.2rem; background-size:1rem auto;
+    }/*阅读数*/
+.txtbox li p.wordcount{ color:#cacaca;}
+.txtbox li p.wordcount:before {
+        content:""; display:inline-block; width:.34rem; height:.35rem; background: url(../images/pic.png) no-repeat; background-position:0 -4.7rem; background-size:1rem auto;
+    }/*书本字数*/
+
+.txtbox .book_info{  height:1.2rem; font-size:12px; color:#999; line-height:0.31rem; overflow:hidden;}
+.txtbox .book_info .book_infowords{font-size:12px;  height:.6rem;overflow:hidden;} 
+.txtbox .book_infosmall{height:1rem; }
+
+/*----列表----*/
+ul.item_list{ padding:0 0.3rem;}
+ul.item_list > li{ display:-webkit-box; -webkit-box-align:center; height:0.9rem; border-top:1px solid #e5e5e5;}
+ul.item_list> li > span.category{ display:block; margin-right:0.3rem; width:0.8rem; text-align: center; font-size:0.2rem; color:#666; line-height:0.3rem; border-radius:0.3rem; overflow:hidden;}
+ul.item_list > li > a{ display:block; padding-right:0.6rem; width:3.4rem; font-size:0.32rem; color:#333; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
+ul.item_list > li > span.author{ display:block; width:1.7rem; font-size:0.28rem; color:#666; letter-spacing:0; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; }
+
+
+/*----精彩专区（二列图）----*/
+.item_box > ul.zhuanqu{ display:-webkit-box; -webkit-box-align:center; padding:0 0.3rem; }
+.item_box > ul.zhuanqu > li{ padding:0.1rem; text-align:center;}
+.item_box > ul.zhuanqu > li img{ background:#ecf9fd; width:3.25rem; height:1rem; border-radius:0.2rem; border:none; font-size:0.3rem;}
+
+/*----猜你喜欢、出版精品（图文三列）----*/
+.item_box > ul.xihuan{ display:-webkit-box; -webkit-box-align:center; padding:0.1rem 0.3rem; width:6.9rem;}
+.item_box > ul.xihuan > li{ padding:0.1rem; width:2.1rem; text-align:center; overflow:hidden;}
+.item_box > ul.xihuan > li img{ width:1.65rem; height:2.2rem; border:1px solid #CCC;}
+.item_box > ul.xihuan > li h2{ font-size:0.28rem; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
+.item_box > ul.xihuan > li p{ color:#999; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;}
+
+#baoyue strong{ line-height:0.8rem; font-weight:500;}
+
+#tejia span.category{ background:#fffca4;}
+
+
+/*----选项卡----*/
+.tabs {
+  margin:0 auto;
+  margin-bottom:0.3rem;
+}
+.tabs li {
+  display:-webkit-box; -webkit-box-align:center;
+  position: relative;
+  overflow: hidden;
+  text-align:center;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+.tabs a {
+  -webkit-box-flex:1;
+  color: #666;
+  display: block;
+  outline: none;
+  text-decoration: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.tabs_item {
+  display: none;
+}
+
+
+.tabs_item:first-child {
+  display: block;
+}
+
+.tabs li .current a {
+  color: #666;
+}
+
+/*----精品专区包月选项卡----*/
+#baoyue .tabs{
+  width: 4.5rem;
+  height:0.6rem;
+  background:#fff;
+  }
+
+#baoyue .tabs li{ 
+  border-radius:0.6rem;
+  -webkit-border-radius:0.6rem;
+  border:0.02rem solid #4fc2f1;}
+#baoyue .tabs li a{
+  line-height: 0.6rem;
+  font-size:0.26rem;
+}
+#baoyue .tabs li .current {
+  background: #a9e9ff;
+}
+
+
+/*----免费页单本特价选项卡----*/
+#tejia .tabs{ display:block; padding:0 0.2rem;}
+#tejia .tabs li{}
+#tejia .tabs a{ width:2.1rem;
+  line-height: 0.6rem;
+  margin:0.05rem 0.1rem;
+  border-radius:0.5rem;
+  border:1px solid #4fc2f1;
+  font-size:0.26rem;
+	}
+#tejia .tabs li .current {
+  background: #c2edff;
+}
+
+
+/*----排行榜页----*/
+#orderlist .tabs{ margin:0;}
+#orderlist .tabs li{ height:0.8rem;}
+#orderlist .tabs li a{
+  line-height: 0.6rem;
+  font-size:0.32rem;
+  border-bottom:1px solid #e5e5e5;
+}
+#orderlist .tabs li .current {
+  color: #ff6000;
+  border-bottom:3px solid #ff6000;
+}
+
+
+
+#orderlist .tab_content{ margin:0; padding:0 0.3rem;}
+#orderlist .pic_txt{ padding:0; height:2.1rem; border-bottom: 1px solid #e5e5e5; overflow:hidden;}
+#orderlist .pic_txt .picbox{ width:1.3rem; height:1.5rem; padding-left:0.04rem; }
+#orderlist .pic_txt .picbox img{ width:1.05rem; height:1.45rem;  border:1px solid #CCC;}
+#orderlist .pic_txt .picbox .poplabel{ position:absolute; left:0; top:-0.04rem; width:0.8rem; height:0.8rem;}
+#orderlist .pic_txt .picbox .end{ background:url(../images/pic.png) no-repeat 0 -5.2rem; background-size:1rem auto;}
+
+#orderlist .txtbox li .bookname{ margin-bottom:0; font-size:0.3rem; height:0.4rem; line-height:0.32rem;}
+#orderlist .txtbox li .order_number{ width:0.3rem; height:0.3rem; background:#ff4436; color:#fff; font-size:0.2rem; text-align:center; line-height:0.3rem;}
+#orderlist .txtbox li .author{ font-size:0.26rem; }
+#orderlist .txtbox li .orderico{ width:1.4rem; font-weight:normal; white-space:nowrap; }
+#orderlist .txtbox li .read, #orderlist .txtbox li .wordcount{ width:1.4rem; font-size:0.22rem; line-height:0.35rem; text-align:left;}
+
+#orderlist .txtbox .book_info{ height:0.6rem; font-size:12px; line-height:0.3rem; }
+
+
+/*----猜你喜欢更多页面----*/
+#ulike ul.xihuan{ display:table; padding:0.1rem 0.3rem; width:6.9rem;}
+#ulike ul.xihuan > li{ float:left; padding:0.1rem 0.09rem;}
+
+/*----没有更多了----*/
+.nomorelist{ line-height:.5rem;}
+.nomorelist p{ padding:.2rem 0 .2rem .3rem; font-size:.26rem; color:#999; line-height:.5rem; text-align:center;}
+.nomorelist p.nomore:before{ content:""; display:inline-block; width:.8rem; height:.45rem; background: url(../images/pic.png) no-repeat; background-position:0 -8.7rem; background-size:1rem auto;}
+
+
+/*----更多潇湘精品页底部推荐区----*/
+.moretj{ background:#fff; padding:.3rem .2rem; height:4rem; overflow:hidden;}
+.moretj ul{ display:block;}
+.moretj ul li{ display: block; float:left; padding:.1rem; width:50%;  box-sizing:border-box;}
+.moretj ul li:last-child{ width:100%;}
+.moretj ul li a{ display:block; padding-left:.85rem; height:.9rem; border-radius:.1rem; font-size:.26rem; color:#666; letter-spacing:0; line-height:.9rem;}
+.moretj ul li a.morebox_end{ background:#feb2bc url(../images/pic.png) no-repeat .1rem -9.2rem; background-size:1rem auto;}
+.moretj ul li a.morebox_ancient{ background:#ffc7ab url(../images/pic.png) no-repeat .1rem -10.1rem; background-size:1rem auto;}
+.moretj ul li a.morebox_modern{ background:#fcebb7 url(../images/pic.png) no-repeat .1rem -11rem; background-size:1rem auto;}
+.moretj ul li a.morebox_fantasy{ background:#c1f5e8 url(../images/pic.png) no-repeat .1rem -11.9rem; background-size:1rem auto;}
+.moretj ul li a.morebox_boutique{ background:#f6cfee url(../images/pic.png) no-repeat .1rem -13.7rem; background-size:1rem auto;}
+.moretj ul li a.morebox{ background:#d6f3ff url(../images/pic.png) no-repeat .1rem -12.8rem; background-size:1rem auto;}
+
+/*魔幻标题*/
+.magic_tit{font-size:0.25rem; padding:.2rem; padding-bottom:.4rem; }
+.firstwords{font-size:0.5rem; color:#4fc2f1;}
+
+
+/*小编说*/
+.editsaycont{ padding: 0.05rem 0.3rem; position: relative; padding-bottom:.2rem;  }
+.editsaycont .editarrow{ position: absolute; width: 0; height: 0; left:.8rem; top:-.13rem; border-color:#FFF #FFF #EDEDED #FFF;border-style:solid;border-width:.1rem;} 
+.editsay{ color: #666; background: #EDEDED; padding: .2rem; border-radius:.1rem; margin-bottom:.2rem; }
+.editsay .say_words{ color:#ff6000; }
+.editsay .editsays_p{ height: .95rem; overflow: hidden;}
+.editsay .editsays_moredown{ height: .2rem; margin-top:.15rem;background:url(../images/pic.png) no-repeat center -14.5rem; background-size:1rem auto; cursor: pointer;} 
+.editsay .editsays_moreup{background:url(../images/pic.png) no-repeat center -16.1rem; background-size:1rem auto;}
+.editsaycont .separate_line{ width: 100%; height: 1px; background: #EDEDED;}
+
+@media all and (max-width: 350px) { 
+  .editsay .editsays_p{ height: 1.1rem; overflow: hidden;}
+  .txtbox .book_info{ font-size:12px;}
+ }
+
+ 

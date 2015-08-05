@@ -1,0 +1,34 @@
+﻿@using Mvc.Web.Android
+@model List<NapiService.Model.Booksearch>
+@{
+    Layout = null;
+    int total = ViewBag.total;
+    int size = ViewBag.size;
+}
+@foreach (var item in Model)
+{
+    if (item.Intro == "") { item.Intro = "暂无简介"; }
+    <a href="/Info_OLD?bookid=@(item.Id)">
+        <div class="pic_txt" @(MvcHtmlString.Create(total < size ? "data-total=\"" + total.ToString() + "\"" : ""))>
+            <div class="picbox bookpic">
+                <img src="http://images.xxsy.net/bimg/@(item.Id).jpg" />
+                @if (item.Status == "已完成")
+                {
+                    <div class="poplabel end"></div>
+                }
+            </div>
+            <ul class="txtbox">
+                <li>
+                    <p class="bookname">@(item.Title)</p>
+                    <p class="category _@(item.ClassId)">@(item.ClassName)</p>
+                </li>
+                <li>
+                    <p class="author">@(item.Author)</p>
+                    <p class="orderico read">@(item.Clicks.ToWan())</p>
+                    <p class="orderico wordcount">@(item.Words.ToWan())</p>
+                </li>
+                <li class="book_info">@(item.Intro.ShortIntro(30))</li>
+            </ul>
+        </div>
+    </a>
+}

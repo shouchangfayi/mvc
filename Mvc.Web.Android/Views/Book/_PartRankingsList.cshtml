@@ -1,0 +1,56 @@
+﻿@using Mvc.Web.Android
+@model List<NapiService.Model.Booksearch>
+@{
+    Layout = null;
+    int tickets = 0;
+    int index = 1;
+    string ticketclass = "";
+}
+@foreach (var item in Model)
+{
+    switch ((NapiService.RankingClass)ViewBag.rankingtype)
+    {
+        // 钻石榜
+        case NapiService.RankingClass.Jewel:
+            tickets = item.Jewels; ticketclass = "diamend"; break;
+        // 鲜花榜
+        case NapiService.RankingClass.Flower:
+            tickets = item.Flowers; ticketclass = "flower"; break;
+        // 月票榜
+        case NapiService.RankingClass.Mon:
+            tickets = item.Mons; ticketclass = "ticket"; break;
+        // 畅销榜
+        case NapiService.RankingClass.VipSomeDay:
+            tickets = item.VipSomeday; ticketclass = "sellwell"; break;
+    }
+
+    if (item.Intro == "") { item.Intro = "暂无简介"; }
+    
+    <a href="/Info_OLD?bookid=@(item.Id)">
+        <div class="pic_txt">
+            <div class="picbox bookpic">
+                <img src="http://images.xxsy.net/bimg/@(item.Id).jpg" />
+                @if (item.Status == "已完成")
+                {
+                    <div class="poplabel end"></div>
+                }
+            </div>
+            <ul class="txtbox">
+                <li>
+                    <p class="bookname">@(item.Title)</p>
+                    @if (ViewBag.rankindex == 0 && index <= 3)
+                    {
+                        <p class="order_number">@(index)</p>
+                        index++;
+                    }
+                </li>
+                <li>
+                    <p class="category _@(item.ClassId)">@(item.ClassName)</p>
+                    <p class="author">@(item.Author)</p>
+                    <p class="orderico @(ticketclass)">@(tickets)</p>
+                </li>
+                <li class="book_info">@(item.Intro.ShortIntro(30))</li>
+            </ul>
+        </div>
+    </a>
+}

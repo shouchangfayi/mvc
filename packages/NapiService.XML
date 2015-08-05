@@ -1,0 +1,2724 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NapiService</name>
+    </assembly>
+    <members>
+        <member name="T:NapiService.BookcaseService">
+            <summary>
+            书架服务
+            </summary>
+        </member>
+        <member name="T:NapiService.Napibase">
+            <summary>
+            服务基础对象
+            </summary>
+        </member>
+        <member name="F:NapiService.Napibase.HOST">
+            <summary>
+            接口地址
+            </summary>
+        </member>
+        <member name="F:NapiService.Napibase.SECRET_KEY">
+            <summary>
+            签名秘钥
+            </summary>
+        </member>
+        <member name="M:NapiService.Napibase.InvokeService``2(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            调用接口返回指定类型
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+            <typeparam name="TAttach">附件类型</typeparam>
+            <param name="httpParameters">请求参数</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.DeleteHttpModel(System.Int32,System.String,System.Int32)">
+            <summary>
+            删除书架作品
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookids">作品ID（多个用英文逗号分隔）</param>
+            <param name="site">来源站点</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.ExistsHttpModel(System.Int32,System.Int32)">
+            <summary>
+            指定作品是否在书架中
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.GetHttpModel(System.Int32,System.Int32,System.Int32,NapiService.BookcaseSort)">
+            <summary>
+            获取书架列表
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引（0开始）</param>
+            <param name="size">分页大小</param>
+            <param name="sort">排序</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.SetHttpModel(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置书架（书签）
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <param name="chapterid">章节ID</param>
+            <param name="site">来路站点ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.Delete(System.Int32,System.String,System.Int32)">
+            <summary>
+            删除书架作品
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookids">作品ID（多个用英文逗号分隔）</param>
+            <param name="site">来源站点</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.Exists(System.Int32,System.Int32)">
+            <summary>
+            指定作品是否在书架中
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.Get(System.Int32,System.Int32,System.Int32,NapiService.BookcaseSort,System.Int32@)">
+            <summary>
+            获取书架列表
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引（0开始）</param>
+            <param name="size">分页大小</param>
+            <param name="sort">排序</param>
+            <param name="total">返回总记录数</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookcaseService.Set(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置书架（书签）
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <param name="chapterid">章节ID</param>
+            <param name="site">来路站点ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="T:NapiService.BookcaseSort">
+            <summary>
+            书架排序
+            </summary>
+        </member>
+        <member name="F:NapiService.BookcaseSort.InsertTime">
+            <summary>
+            添加倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.BookcaseSort.Name">
+            <summary>
+            名字正序
+            </summary>
+        </member>
+        <member name="F:NapiService.BookcaseSort.UpdateTime">
+            <summary>
+            更新倒序
+            </summary>
+        </member>
+        <member name="T:NapiService.BookService">
+            <summary>
+            作品服务
+            </summary>
+        </member>
+        <member name="M:NapiService.BookService.BuyMonthlyHttpModel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            购买包月
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="buyCount">购买数月(1-1个月，2-2个月以此类推)</param>
+            <param name="site">来路站点ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.BuySpecialofferHttpModel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            购买特价书
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <param name="site">来源站点ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetListHttpModel(System.String)">
+            <summary>
+            通过多个ID获取多个作品的信息
+            </summary>
+            <param name="bookids">作品ID（多个ID之间用英文逗号分隔）</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetAuthorAllBooksHttpModel(System.Int32)">
+            <summary>
+            获取作品的所有作品
+            </summary>
+            <param name="authorid">作者ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetAuthorOtherBooksHttpModel(System.Int32)">
+            <summary>
+            获取作者指定作品ID之外的其他作品
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetDirectoriesHttpModel(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            获取作品的目录
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <param name="sort">排序0-正序，1-倒序</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetDirectoriesHttpModel(System.Int32,System.DateTime)">
+            <summary>
+            获取作品的目录
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="updateTime">更新时间</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetEffectsHttpModel(System.Int32,System.Int32)">
+            <summary>
+            获取作品效果，同时返回第一个作品效果的简介
+            </summary>
+            <param name="effectType">效果类型</param>
+            <param name="count">获取个数</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetEffectRecommendtionHttpModel(NapiService.RecommendClass,System.Int32,System.Int32)">
+            <summary>
+            效果推荐（主要用于首页，古代、现代、玄幻这些推荐）
+            </summary>
+            <param name="recClass">推荐类型</param>
+            <param name="count">获取数量</param>
+            <param name="maxCount">候选数量</param>
+            <returns></returns>
+        </member>
+        <member name="M:NapiService.BookService.GetGiftsHttpModel(System.Int32,NapiService.GiftClass,System.Int32,System.Int32)">
+            <summary>
+            返回作品的礼物信息，同时返回总记录数、指定礼物数，粉丝数
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="gclass">礼物类型</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetNewGiftsHttpModel(NapiService.GiftClass,System.Int32)">
+            <summary>
+            获取最新的礼物信息
+            </summary>
+            <param name="gclass">礼物类型</param>
+            <param name="count">获取数量</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetReviewsHttpModel(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            获取作品评论
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="index">分页索引（默认0）</param>
+            <param name="size">分页大小</param>
+            <param name="parent">父评论ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetRankingsHttpModel(NapiService.RankingClass,System.Int32,System.Int32)">
+            <summary>
+            获取榜单
+            </summary>
+            <param name="ranClass">榜单类型</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.SameRecommendtionHttpModel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            同类推荐
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="count">获取数量</param>
+            <param name="maxCount">候选数量</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetUserSpecialofferbooksHttpModel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            获取用户购买的特价作品(附件里为总记录数)
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetHttpModel(System.Int32)">
+            <summary>
+            获取作品信息
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.SearchHttpModel(NapiService.SearchObject)">
+            <summary>
+            作品查询
+            </summary>
+            <param name="searchObject">查询对象</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.SubscribeCheckHttpModel(System.Int32,System.Int32)">
+            <summary>
+            判断用户是否已经购买特价书或者包月书
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.BookService.BuyMonthly(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            购买包月
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="buyCount">购买数月(1-1个月，2-2个月以此类推)</param>
+            <param name="site">来路站点ID</param>
+            <returns>ChapterSubscribeResult</returns>
+        </member>
+        <member name="M:NapiService.BookService.BuySpecialoffer(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            购买特价书
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <param name="site">来源站点ID</param>
+            <returns>ChapterSubscribeResult</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetList(System.Int32[])">
+            <summary>
+            通过多个ID获取多个作品的信息
+            </summary>
+            <param name="bookids">作品ID（多个ID之间用英文逗号分隔）</param>
+            <returns>Book集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetAuthorAllBooks(System.Int32)">
+            <summary>
+            获取作品的所有作品
+            </summary>
+            <param name="authorid">作者ID</param>
+            <returns>Book集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetAuthorOtherBooks(System.Int32)">
+            <summary>
+            获取作者指定作品ID之外的其他作品
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>Book集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetDirectories(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取作品的目录
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <param name="sort">排序0-正序，1-倒序</param>
+            <param name="total">返回总记录数</param>
+            <returns>Bookdirectory集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetDirectories(System.Int32,System.DateTime)">
+            <summary>
+            获取作品的目录
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="updateTime">更新时间</param>
+            <returns>Bookdirectory集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetEffects(System.Int32,System.Int32,System.String@)">
+            <summary>
+            获取作品效果，同时返回第一个作品效果的简介
+            </summary>
+            <param name="effectType">效果类型</param>
+            <param name="count">获取个数</param>
+            <param name="firstIntro">返回首章简介</param>
+            <returns>Bookeffect集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetEffectRecommendtion(NapiService.RecommendClass,System.Int32,System.Int32,System.String@)">
+            <summary>
+            效果推荐（主要用于首页，古代、现代、玄幻这些推荐）
+            </summary>
+            <param name="recClass">推荐类型</param>
+            <param name="count">获取数量</param>
+            <param name="maxCount">候选数量</param>
+            <param name="firstIntro">返回首章简介</param>
+            <returns>Booksearch集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetGifts(System.Int32,NapiService.GiftClass,System.Int32,System.Int32,NapiService.GiftAttachment@)">
+            <summary>
+            返回作品的礼物信息，同时返回总记录数、指定礼物数，粉丝数
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="gclass">礼物类型</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <param name="attach">返回GiftAttachment</param>
+            <returns>Bookgift集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetNewGifts(NapiService.GiftClass,System.Int32,NapiService.GiftAttachment@)">
+            <summary>
+            获取最新的礼物信息
+            </summary>
+            <param name="gclass">礼物类型</param>
+            <param name="count">获取数量</param>
+            <param name="attach">返回GiftAttachment</param>
+            <returns>Bookgift集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetReviews(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取作品评论
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="index">分页索引（默认0）</param>
+            <param name="size">分页大小</param>
+            <param name="parent">父评论ID</param>
+            <param name="total">返回总记录数</param>
+            <returns>Bookreview集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetRankings(NapiService.RankingClass,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取榜单
+            </summary>
+            <param name="ranClass">榜单类型</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <param name="total">返回总记录数</param>
+            <returns>Booksearch集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.SameRecommendtion(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            同类推荐
+            </summary>
+            <param name="bookid">作品ID</param>
+            <param name="count">获取数量</param>
+            <param name="maxCount">候选数量</param>
+            <returns>Booksearch集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.GetUserSpecialofferbooks(System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取用户购买的特价作品(附件里为总记录数)
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <param name="total">返回总记录数</param>
+            <returns>Booksearch集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.Get(System.Int32)">
+            <summary>
+            获取作品信息
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>Book</returns>
+        </member>
+        <member name="M:NapiService.BookService.Search(NapiService.SearchObject,System.Int32@)">
+            <summary>
+            作品查询
+            </summary>
+            <param name="searchObject">查询对象</param>
+            <param name="total">返回总记录数</param>
+            <returns>Booksearch集合</returns>
+        </member>
+        <member name="M:NapiService.BookService.SubscribeCheck(System.Int32,System.Int32)">
+            <summary>
+            判断用户是否已经购买特价书或者包月书
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:NapiService.SearchObject">
+            <summary>
+            查询对象
+            </summary>
+        </member>
+        <member name="M:NapiService.SearchObject.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Index">
+            <summary>
+            查询分页索引（默认0）
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Size">
+            <summary>
+            分页大小（默认10）
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Keyword">
+            <summary>
+            查询关键字
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Target">
+            <summary>
+            查询标签
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Class">
+            <summary>
+            查询类型
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.StartWords">
+            <summary>
+            字数开始
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.EndWords">
+            <summary>
+            字数结束
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Vip">
+            <summary>
+            vip值 1-VIP, 2-非VIP
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.IsMonthly">
+            <summary>
+            是否包月作品
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.IsSpecialoffer">
+            <summary>
+            是否特价作品
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.IsClientFree">
+            <summary>
+            是否客户端免费
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:NapiService.SearchObject.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="T:NapiService.GiftAttachment">
+            <summary>
+            获取礼物时的附加信息
+            </summary>
+        </member>
+        <member name="P:NapiService.GiftAttachment.Total">
+            <summary>
+            礼物总数
+            </summary>
+        </member>
+        <member name="P:NapiService.GiftAttachment.Sum">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:NapiService.GiftAttachment.Fans">
+            <summary>
+            粉丝知
+            </summary>
+        </member>
+        <member name="T:NapiService.SearchBookStatus">
+            <summary>
+            作品状态(查询用)
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchBookStatus.All">
+            <summary>
+            状态所有
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchBookStatus.Finished">
+            <summary>
+            已完结
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchBookStatus.Serial">
+            <summary>
+            连载中
+            </summary>
+        </member>
+        <member name="T:NapiService.SearchClass">
+            <summary>
+            查询分类
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.None">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.PassThrough">
+            <summary>
+            穿越
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.Aerial">
+            <summary>
+            架空
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.Urban">
+            <summary>
+            都市
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.Youth">
+            <summary>
+            青春
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.Magical">
+            <summary>
+            魔幻
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.Occult">
+            <summary>
+            玄幻
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.PowerfulFamily">
+            <summary>
+            豪门
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.History">
+            <summary>
+            历史
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.Ability">
+            <summary>
+            异能
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.ShortArticle">
+            <summary>
+            短篇
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.Tanbi">
+            <summary>
+            耽美
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchClass.All">
+            <summary>
+            所有分类
+            </summary>
+        </member>
+        <member name="T:NapiService.SearchSort">
+            <summary>
+            查询排序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Default">
+            <summary>
+            默认排序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.VipSameDay_Desc">
+            <summary>
+            VIP收入倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Jewel_Desc">
+            <summary>
+            钻石倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Flower_Desc">
+            <summary>
+            鲜花倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Click_Desc">
+            <summary>
+            点击倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Mon_Desc">
+            <summary>
+            月票倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Assess_Desc">
+            <summary>
+            评价倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Favorites_Desc">
+            <summary>
+            收藏倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Words_Desc">
+            <summary>
+            字数倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.UpdateTime_Desc">
+            <summary>
+            作品更新倒序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.VipSameDay_Asc">
+            <summary>
+            VIP收入正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Jewel_Asc">
+            <summary>
+            钻石正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Flower_Asc">
+            <summary>
+            鲜花正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Click_Asc">
+            <summary>
+            点击正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Mon_Asc">
+            <summary>
+            月票正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Assess_Asc">
+            <summary>
+            评价正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Favorites_Asc">
+            <summary>
+            收藏正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Words_Asc">
+            <summary>
+            字数正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.UpdateTime_Asc">
+            <summary>
+            作品更新正序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.Random">
+            <summary>
+            乱序排列
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.VipSameDayDescAndUpdateTimeDesc">
+            <summary>
+            收入降序再更新降序
+            </summary>
+        </member>
+        <member name="F:NapiService.SearchSort.FavoritesDescAndClickDesc">
+            <summary>
+            收藏排序在点击排序
+            </summary>
+        </member>
+        <member name="T:NapiService.RecommendClass">
+            <summary>
+            推荐效果类型
+            </summary>
+        </member>
+        <member name="F:NapiService.RecommendClass.Ancient">
+            <summary>
+            古代推荐
+            </summary>
+        </member>
+        <member name="F:NapiService.RecommendClass.Modern">
+            <summary>
+            现代推荐
+            </summary>
+        </member>
+        <member name="F:NapiService.RecommendClass.Occult">
+            <summary>
+            玄幻推荐
+            </summary>
+        </member>
+        <member name="F:NapiService.RecommendClass.Finished">
+            <summary>
+            完结推荐
+            </summary>
+        </member>
+        <member name="F:NapiService.RecommendClass.Fine">
+            <summary>
+            精品推荐
+            </summary>
+        </member>
+        <member name="F:NapiService.RecommendClass.Free">
+            <summary>
+            客户端免费
+            </summary>
+        </member>
+        <member name="T:NapiService.GiftClass">
+            <summary>
+            作品礼物类型
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.All">
+            <summary>
+            所有
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Jewel">
+            <summary>
+            钻石
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Flower">
+            <summary>
+            鲜花
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Egg">
+            <summary>
+            鸡蛋
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Mon">
+            <summary>
+            月票
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Reward">
+            <summary>
+            打赏
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Update">
+            <summary>
+            崔更
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Ticket">
+            <summary>
+            投票2012年会投票
+            </summary>
+        </member>
+        <member name="F:NapiService.GiftClass.Assess">
+            <summary>
+            评价
+            </summary>
+        </member>
+        <member name="T:NapiService.RankingClass">
+            <summary>
+            榜单类型
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.VipSomeDay">
+            <summary>
+            收入榜（人气榜）
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.Jewel">
+            <summary>
+            钻石榜
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.Flower">
+            <summary>
+            鲜花榜
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.Click">
+            <summary>
+            点击榜
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.Mon">
+            <summary>
+            月票榜
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.Assess">
+            <summary>
+            评价榜
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.Favorites">
+            <summary>
+            收藏榜
+            </summary>
+        </member>
+        <member name="F:NapiService.RankingClass.Words">
+            <summary>
+            字数榜
+            </summary>
+        </member>
+        <member name="T:NapiService.ChapterService">
+            <summary>
+            章节服务相关
+            </summary>
+        </member>
+        <member name="M:NapiService.ChapterService.GetByIdHttpModel(System.Int32)">
+            <summary>
+            请求获取章节信息（不包含章节内容）
+            </summary>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetDetailHttpModel(System.Int32,System.Int32)">
+            <summary>
+            请求获取章节信息（包含章节内容）
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetFirstHttpModel(System.Int32)">
+            <summary>
+            请求获取作品的首个章节(不包含章节内容)
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetLastHttpModel(System.Int32)">
+            <summary>
+            请求获取作品的最后一个章节(不包含章节内容)
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetSubscribeDetailHttpModel(System.Int32,System.Int32)">
+            <summary>
+            请求获取订阅详情
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.IsSubscribeHttpModel(System.Int32,System.Int32)">
+            <summary>
+            请求判断是否已
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.SubscribeHttpModel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            请求章节订阅
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <param name="site">来路站点(订阅来源)</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetById(System.Int32)">
+            <summary>
+            获取章节信息（不包含章节内容）
+            </summary>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetDetail(System.Int32,System.Int32)">
+            <summary>
+            获取章节信息（包含章节内容）
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetFirst(System.Int32)">
+            <summary>
+            获取作品的首个章节(不包含章节内容)
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetLast(System.Int32)">
+            <summary>
+            获取作品的最后一个章节(不包含章节内容)
+            </summary>
+            <param name="bookid">作品ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.GetSubscribeDetail(System.Int32,System.Int32)">
+            <summary>
+            获取订阅详情
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.IsSubscribe(System.Int32,System.Int32)">
+            <summary>
+            判断是否已
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.ChapterService.Subscribe(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            章节订阅
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="chapterid">章节ID</param>
+            <param name="site">来路站点(订阅来源)</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="T:NapiService.ChapterSubscribeResult">
+            <summary>
+            章节订阅结果
+            </summary>
+        </member>
+        <member name="P:NapiService.ChapterSubscribeResult.Code">
+            <summary>
+            为0的时候订阅成功
+            </summary>
+        </member>
+        <member name="P:NapiService.ChapterSubscribeResult.Message">
+            <summary>
+            订阅失败时返回信息
+            </summary>
+        </member>
+        <member name="P:NapiService.ChapterSubscribeResult.Mons">
+            <summary>
+            订阅成功之后获取的月票数（不是每次订阅都能获取，需要消费达到一定的数量）
+            </summary>
+        </member>
+        <member name="P:NapiService.ChapterSubscribeResult.Assess">
+            <summary>
+            订阅成功之后获取的评价票数（不是每次订阅都能获取，需要消费达到一定的数量）
+            </summary>
+        </member>
+        <member name="T:NapiService.MemberService">
+            <summary>
+            用户相关
+            </summary>
+        </member>
+        <member name="M:NapiService.MemberService.GetMemberByIdHttpModel(System.Int32)">
+            <summary>
+            通过用户ID请求用户信息
+            </summary>
+            <param name="userid">用户ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetRechargesHttpModel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            请求用户的订阅信息(附件为总记录数)
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引</param>
+            <param name="size">分页大小</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetGiftsHttpModel(System.Int32,NapiService.NapiGiftType,System.Int32,System.Int32)">
+            <summary>
+            请求获取用户送出的礼物信息
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="gtype">礼物类型</param>
+            <param name="index">分页索引（0开始）</param>
+            <param name="size">分页大小</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetMonthlyEndTimeHttpModel(System.Int32)">
+            <summary>
+            请求获取用户包月的结束时间
+            </summary>
+            <param name="userid">用户ID</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.LoginHttpModel(System.String,System.String,System.Int32)">
+            <summary>
+            请求登录（附件为SessionCode Ajax调用时作为请求凭证）
+            </summary>
+            <param name="username">用户名</param>
+            <param name="userpassword">密码</param>
+            <param name="site">来路站点</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.LoginByQQHttpModel(System.String,System.Int32)">
+            <summary>
+            请求登录用QQ号(附件为SessionCode Ajax调用时作为请求凭证)
+            </summary>
+            <param name="authorizecode">QQ授权码</param>
+            <param name="site">来路站点</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.BindingQQHttpModel(System.String,System.String,System.String,NapiService.NapiBindingType,System.Int32,System.Int32)">
+            <summary>
+            请求QQ号绑定(附件为SessionCode Ajax调用时作为请求凭证)
+            </summary>
+            <param name="authorizecode">QQ授权码</param>
+            <param name="username">用户名</param>
+            <param name="userpassword">密码</param>
+            <param name="type">绑定类型</param>
+            <param name="channel">渠道号</param>
+            <param name="site">来路站点</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.RegisterHttpModel(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            请求注册(附件为SessionCode Ajax调用时作为请求凭证)
+            </summary>
+            <param name="username">用户名</param>
+            <param name="userpassword">密码</param>
+            <param name="mail">邮箱</param>
+            <param name="mobile">手机号</param>
+            <param name="sex">性别</param>
+            <param name="channel">渠道号</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.UpdatePasswordHttpModel(System.Int32,System.String,System.String)">
+            <summary>
+            请求密码更新(附件为SessionCode Ajax调用时作为请求凭证)
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="oldpassword">旧密码</param>
+            <param name="newpassword">新密码</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.UpdatePasswordHttpModel(System.String,System.String)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="username">用户名</param>
+            <param name="newpassword">新密码</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.PostSuggestHttpModel(System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            请求发送用户建议
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="suggest">建议</param>
+            <param name="mobile">手机号</param>
+            <param name="site">来路站点</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.IsChargedHttpModel(System.Int32,System.String)">
+            <summary>
+            请求判断用户是否有充过值
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="imei">手机设备号</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetVipSubscribeDetailsHttpModel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            请求获取用户的订阅详情（不包含当天的记录）
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引（0开始）</param>
+            <param name="size">分页大小</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.UpdateMobileHttpModel(System.Int32,System.String,System.Int32)">
+            <summary>
+            更新手机号
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="mobile">手机号</param>
+            <param name="type">更新类型，0-解除绑定， 1-绑定</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetByNameHttpModel(System.String)">
+            <summary>
+            通过用户名获取用户信息
+            </summary>
+            <param name="username">用户名</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetByMobileHttpModel(System.String)">
+            <summary>
+            通过手机号获取用户信息
+            </summary>
+            <param name="mobile">手机号</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendReviewHttpModel(System.Int32,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            发表评论
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <param name="content">评论内容</param>
+            <param name="ip">IP（可为空）</param>
+            <param name="mobiledetail">手机信息</param>
+            <param name="site">订阅渠道号(站点来源ID)</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsMessageHttpModel(System.String,System.String)">
+            <summary>
+            发送短信
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="msg">短信内容</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsRegisterMessageHttpModel(System.String,System.String)">
+            <summary>
+            发送注册验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsFindPasswordMessageHttpModel(System.String,System.String)">
+            <summary>
+            发送找回密码验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsBindingMobileMessageHttpModel(System.String,System.String)">
+            <summary>
+            发送手机绑定验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsUnbindingMobileMessageHttpModel(System.String,System.String)">
+            <summary>
+            发送手机解绑验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetById(System.Int32)">
+            <summary>
+            通过用户ID获取用户信息
+            </summary>
+            <param name="id">用户ID</param>
+            <returns>用户对象</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetRecharges(System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取用户的充值信息
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引（0开始）</param>
+            <param name="size">分页大小</param>
+            <param name="total">返回总记录数</param>
+            <returns>充值信息集合</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetGiftsHttpModel(System.Int32,NapiService.NapiGiftType,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            获取用户送出的礼物记录
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="gtype">礼物</param>
+            <param name="index">分页索引（0）</param>
+            <param name="size">分页大小</param>
+            <param name="total">返回总记录数</param>
+            <returns>gift集合</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetMonthlyEndTime(System.Int32)">
+            <summary>
+            获取用户包月结束时间
+            </summary>
+            <param name="userid">用户ID</param>
+            <returns>包月结束时间</returns>
+        </member>
+        <member name="M:NapiService.MemberService.Login(System.String,System.String,System.Int32,System.String@)">
+            <summary>
+            用户登录
+            </summary>
+            <param name="username">用户名</param>
+            <param name="userpassword">密码</param>
+            <param name="site">来路站点</param>
+            <param name="sessionCode">返回SessionCode，作为AJAX调用的凭证</param>
+            <returns>用户信息</returns>
+        </member>
+        <member name="M:NapiService.MemberService.LoginByQQ(System.String,System.Int32,System.String@)">
+            <summary>
+            QQ登录
+            </summary>
+            <param name="authorizecode">QQ授权码</param>
+            <param name="site">来路站点</param>
+            <param name="sessionCode">返回SessionCode，作为AJAX调用的凭证</param>
+            <returns>用户信息</returns>
+        </member>
+        <member name="M:NapiService.MemberService.BindingQQ(System.String,System.String,System.String,NapiService.NapiBindingType,System.Int32,System.Int32,System.String@)">
+            <summary>
+            QQ绑定
+            </summary>
+            <param name="authorizecode">QQ授权码</param>
+            <param name="username">用户名</param>
+            <param name="userpassword">用户密码</param>
+            <param name="type">创建类型</param>
+            <param name="channel">渠道号</param>
+            <param name="site">来路站点</param>
+            <param name="sessionCode">返回SessionCode，作为AJAX调用的凭证</param>
+            <returns>Member</returns>
+        </member>
+        <member name="M:NapiService.MemberService.Register(System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String@)">
+            <summary>
+            用户注册
+            </summary>
+            <param name="username">用户名</param>
+            <param name="userpassword">密码</param>
+            <param name="mail">邮箱</param>
+            <param name="mobile">手机号</param>
+            <param name="sex">性别</param>
+            <param name="channel">来去渠道号</param>
+            <param name="sessionCode">返回SessionCode，作为AJAX调用的凭证</param>
+            <returns>用户信息</returns>
+        </member>
+        <member name="M:NapiService.MemberService.UpdatePassword(System.Int32,System.String,System.String,System.String@)">
+            <summary>
+            更改密码
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="oldpassword">旧密码</param>
+            <param name="newpassword">新密码</param>
+            <param name="sessionCode">返回SessionCode，作为AJAX调用的凭证</param>
+            <returns>用户信息</returns>
+        </member>
+        <member name="M:NapiService.MemberService.UpdatePassword(System.String,System.String,System.String@)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="username">用户名</param>
+            <param name="newpassword">新密码</param>
+            <param name="sessionCode">SessionCode</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.PostSuggest(System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            发送建议
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="suggest">建议内容</param>
+            <param name="mobile">手机号</param>
+            <param name="site">来路站点</param>
+            <returns>成功与否</returns>
+        </member>
+        <member name="M:NapiService.MemberService.IsCharged(System.Int32,System.String)">
+            <summary>
+            请求判断用户是否有充过值
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="imei">手机设备号</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetVipSubscribeDetails(System.Int32,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            请求获取用户的订阅详情（不包含当天的记录）
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="index">分页索引（0开始）</param>
+            <param name="size">分页大小</param>
+            <param name="total">总记录数</param>
+            <returns>VipSubscribeDetail集合</returns>
+        </member>
+        <member name="M:NapiService.MemberService.UpdateMobile(System.Int32,System.String,System.Int32)">
+            <summary>
+            更新手机号
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="mobile">手机号</param>
+            <param name="type">更新类型，0-解除绑定， 1-绑定</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetByName(System.String)">
+            <summary>
+            通过用户名获取用户信息
+            </summary>
+            <param name="username">用户名</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.GetByMobile(System.String)">
+            <summary>
+            通过手机号获取用户信息
+            </summary>
+            <param name="mobile">手机号</param>
+            <returns>HttpModel</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendReview(System.Int32,System.Int32,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            发表评论
+            </summary>
+            <param name="userid">用户ID</param>
+            <param name="bookid">作品ID</param>
+            <param name="content">评论内容</param>
+            <param name="ip">IP（可为空）</param>
+            <param name="mobiledetail">手机信息</param>
+            <param name="site">订阅渠道号</param>
+            <returns>评论是否成功true: 成功, false: 失败</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsMessage(System.String,System.String)">
+            <summary>
+            发送短信（需定制模板）
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="msg">短信内容</param>
+            <returns>发送成功与否</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsRegisterMessage(System.String,System.String)">
+            <summary>
+            发送注册验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>发送成功与否</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsFindPassword(System.String,System.String)">
+            <summary>
+            发送找回密码验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>发送成功与否</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsBindingMobileMessage(System.String,System.String)">
+            <summary>
+            发送手机绑定验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>发送成功与否</returns>
+        </member>
+        <member name="M:NapiService.MemberService.SendSmsUnbindingMobileMessage(System.String,System.String)">
+            <summary>
+            发送手机解绑验证码
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="code">验证码</param>
+            <returns>发送成功与否</returns>
+        </member>
+        <member name="T:NapiService.NapiGiftType">
+            <summary>
+            礼物类型
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.All">
+            <summary>
+            所有
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Jewel">
+            <summary>
+            钻石
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Flower">
+            <summary>
+            鲜花
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Egg">
+            <summary>
+            鸡蛋
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Mon">
+            <summary>
+            月票
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Reward">
+            <summary>
+            打赏
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Update">
+            <summary>
+            崔更
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Ticket">
+            <summary>
+            投票2012年会投票
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiGiftType.Assess">
+            <summary>
+            评价
+            </summary>
+        </member>
+        <member name="T:NapiService.NapiBindingType">
+            <summary>
+            QQ绑定类型
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiBindingType.Binding">
+            <summary>
+            绑定到现有账号
+            </summary>
+        </member>
+        <member name="F:NapiService.NapiBindingType.Create">
+            <summary>
+            创建新账号并绑定
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Book">
+            <summary>
+            作品对象
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Id">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Title">
+            <summary>
+            作品名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.ClassName">
+            <summary>
+            分类名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.ClassId">
+            <summary>
+            分类ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.AuthorId">
+            <summary>
+            作者ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Author">
+            <summary>
+            作者名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.AuthorLevel">
+            <summary>
+            作者等级
+            0-普通
+            1-铜牌
+            2-银牌
+            3-金牌
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Intro">
+            <summary>
+            作品原简介
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Vip">
+            <summary>
+            VIP 1-VIP， 0-非VIP
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Words">
+            <summary>
+            字数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Clicks">
+            <summary>
+            总点击数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Jewels">
+            <summary>
+            收到钻石数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Flowers">
+            <summary>
+            收到鲜花数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Mons">
+            <summary>
+            收到月票数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Favorites">
+            <summary>
+            收藏数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Assess">
+            <summary>
+            收到评价票数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.SpecialOffer">
+            <summary>
+            特价
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.IsMonthly">
+            <summary>
+            是否是包月作品
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Check">
+            <summary>
+            审核
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Book.Fans">
+            <summary>
+            粉丝数
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Bookcase">
+            <summary>
+            书架对象
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.Id">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.Title">
+            <summary>
+            作品标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.Author">
+            <summary>
+            作者笔名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.Status">
+            <summary>
+            作品状态
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.InsertTime">
+            <summary>
+            写入时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.AutoSubscribe">
+            <summary>
+            是否自动订阅
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.ChapterId">
+            <summary>
+            标签ID(章节ID)
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookcase.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Bookdirectory">
+            <summary>
+            作品目录
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.Id">
+            <summary>
+            章节ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.BookId">
+            <summary>
+            书ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.VolumeId">
+            <summary>
+            卷ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.Title">
+            <summary>
+            章节标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.UpdateTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.IsVip">
+            <summary>
+            是否VIP
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.Price">
+            <summary>
+            章节原始价格（实际价格需要和用户等级挂钩）
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.PreviousId">
+            <summary>
+            上一章ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookdirectory.NextId">
+            <summary>
+            下一章ID
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Bookeffect">
+            <summary>
+            作品效果
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.Id">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.Title">
+            <summary>
+            作品标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.SubTitle">
+            <summary>
+            作品副标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.Type">
+            <summary>
+            推荐类型
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.JumpUrl">
+            <summary>
+            跳转URL
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.ClassId">
+            <summary>
+            作品分类ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.ClassName">
+            <summary>
+            分类名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.AuthorName">
+            <summary>
+            作者名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.IsVip">
+            <summary>
+            是否VIP
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookeffect.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Bookgift">
+            <summary>
+            作品礼物
+            </summary>
+        </member>
+        <member name="M:NapiService.Model.Bookgift.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.Id">
+            <summary>
+            自动ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.AuthorId">
+            <summary>
+            作者ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.BookId">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.BookName">
+            <summary>
+            作品名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.Type">
+            <summary>
+            礼物类型ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.TypeName">
+            <summary>
+            礼物类型名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.Time">
+            <summary>
+            赠送时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.Count">
+            <summary>
+            赠送数量
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookgift.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Bookreview">
+            <summary>
+            作品评论
+            </summary>
+        </member>
+        <member name="M:NapiService.Model.Bookreview.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.Id">
+            <summary>
+            自动ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.BookId">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.BookName">
+            <summary>
+            作品名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.InsertTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.Content">
+            <summary>
+            用户评论
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.Essence">
+            <summary>
+            精华
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.IsTop">
+            <summary>
+            是否置顶
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.IP">
+            <summary>
+            用户IP
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.Ispc">
+            <summary>
+            来源
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.Reply">
+            <summary>
+            作者回复
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.Fans">
+            <summary>
+            粉丝
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.Level">
+            <summary>
+            等级详情
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Bookreview.MedalList">
+            <summary>
+            会员获取的勋章列表
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Medal">
+            <summary>
+            勋章对象
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Medal.Id">
+            <summary>
+            勋章ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Medal.Name">
+            <summary>
+            勋章名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Medal.Level">
+            <summary>
+            勋章等级
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Booksearch">
+            <summary>
+            作品查询对象
+            </summary>
+        </member>
+        <member name="M:NapiService.Model.Booksearch.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Id">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Title">
+            <summary>
+            作品名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.ClassName">
+            <summary>
+            分类名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.ClassId">
+            <summary>
+            分类ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.AuthorId">
+            <summary>
+            作者ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Vip">
+            <summary>
+            VIP 1-VIP， 0-非VIP
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Intro">
+            <summary>
+            简介
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Words">
+            <summary>
+            字数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Clicks">
+            <summary>
+            总点击数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Jewels">
+            <summary>
+            收到钻石数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Flowers">
+            <summary>
+            收到鲜花数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Mons">
+            <summary>
+            收到月票数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Favorites">
+            <summary>
+            收藏数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Assess">
+            <summary>
+            收到评价票数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.VipSomeday">
+            <summary>
+            收入
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.UpdateTimestamp">
+            <summary>
+            更新时间戳
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.IsMonthly">
+            <summary>
+            是否是包月作品
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.SpecialOffer">
+            <summary>
+            特价
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Check">
+            <summary>
+            审核
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Booksearch.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Chapter">
+            <summary>
+            作品章节对象
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.Id">
+            <summary>
+            章节ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.BookId">
+            <summary>
+            书ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.VolumeId">
+            <summary>
+            卷ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.Title">
+            <summary>
+            章节标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.CreateTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.Words">
+            <summary>
+            字数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.AuthorId">
+            <summary>
+            作者ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.IsVip">
+            <summary>
+            是否VIP
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.Price">
+            <summary>
+            章节原始价格（实际价格需要和用户等级挂钩）
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.Content">
+            <summary>
+            章节内容
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.Check">
+            <summary>
+            检测字段
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.CheckTime">
+            <summary>
+            审核时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.PreviousId">
+            <summary>
+            上一章ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Chapter.NextId">
+            <summary>
+            下一章ID
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Gift">
+            <summary>
+            礼物(道具)
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.Id">
+            <summary>
+            自动ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.AuthorId">
+            <summary>
+            作者ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.BookId">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.BookName">
+            <summary>
+            作品名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.Type">
+            <summary>
+            礼物类型ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.TypeName">
+            <summary>
+            礼物类型名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.Time">
+            <summary>
+            赠送时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.Count">
+            <summary>
+            赠送数量
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Gift.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.HttpModel`2">
+            <summary>
+            接口返回结果对象
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+            <typeparam name="TAttach">附件数据类型</typeparam>
+        </member>
+        <member name="F:NapiService.Model.HttpModel`2.Code">
+            <summary>
+            响应Code
+            </summary>
+        </member>
+        <member name="F:NapiService.Model.HttpModel`2.Message">
+            <summary>
+            响应信息
+            </summary>
+        </member>
+        <member name="F:NapiService.Model.HttpModel`2.Data">
+            <summary>
+            响应数据
+            </summary>
+        </member>
+        <member name="F:NapiService.Model.HttpModel`2.Attachments">
+            <summary>
+            附加数据
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Member">
+            <summary>
+            用户对象
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Id">
+            <summary>
+            会员ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Name">
+            <summary>
+            会员名
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Password">
+            <summary>
+            会员密码
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Account">
+            <summary>
+            会员账户余额
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.CreateTime">
+            <summary>
+            会员创建时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Fans">
+            <summary>
+            会员粉丝值
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Montickets">
+            <summary>
+            月票数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Assesstickets">
+            <summary>
+            评价票数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Status">
+            <summary>
+            用户状态
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.LastLoginTime">
+            <summary>
+            最后登录时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Group">
+            <summary>
+            用户组ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.IsBindingMobile">
+            <summary>
+            是否绑定手机号
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.TencentLoginCode">
+            <summary>
+            腾讯登录Code
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Mobile">
+            <summary>
+            绑定手机号
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.Channel">
+            <summary>
+            渠道
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Member.MedalChars">
+            <summary>
+            勋章字符串
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.Recharge">
+            <summary>
+            充值记录
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Recharge.Id">
+            <summary>
+            自动ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Recharge.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Recharge.Time">
+            <summary>
+            充值时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Recharge.Amount">
+            <summary>
+            充值点数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Recharge.Order">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Recharge.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.Recharge.Channel">
+            <summary>
+            渠道编号
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.ChapterSubscribeDetail">
+            <summary>
+            章节订阅详情
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.Code">
+            <summary>
+            状态码（0-正常，1-不正常）
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.BookTitle">
+            <summary>
+            作品名称
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.ChapterTitle">
+            <summary>
+            章节名称
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.UserAccount">
+            <summary>
+            用户余额
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.VipCount">
+            <summary>
+            VIP章节数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.Price">
+            <summary>
+            本章价格
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.OriginalPrice">
+            <summary>
+            本章原价
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.TotalPrice">
+            <summary>
+            订阅剩余VIP章节的总价格
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.IsMonthly">
+            <summary>
+            是否包月作品(0-不是,1-是)
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.SpecialOffer">
+            <summary>
+            全本特价
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.Purchased">
+            <summary>
+            已购买VIP章节数
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.ChapterSubscribeDetail.Surplus">
+            <summary>
+            未购买VIP章节数
+            </summary>
+        </member>
+        <member name="T:NapiService.Model.VipSubscribeDetail">
+            <summary>
+            Vip订阅详情
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.Id">
+            <summary>
+            作品ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.Title">
+            <summary>
+            作品标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.Author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.Status">
+            <summary>
+            作品状态
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.Time">
+            <summary>
+            阅读时间
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.ChapterId">
+            <summary>
+            最后阅读的章节ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.ChapterTitle">
+            <summary>
+            最后阅读的章节标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.LastChapterId">
+            <summary>
+            最新更新的章节ID
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.LastChapterTitle">
+            <summary>
+            最新更新的章节标题
+            </summary>
+        </member>
+        <member name="P:NapiService.Model.VipSubscribeDetail.UpdateTime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="T:NapiService.WebHelper">
+            <summary>
+            Web帮助类
+            </summary>
+        </member>
+        <member name="M:NapiService.WebHelper.IsEmpty(System.String[])">
+            <summary>
+            判断一个字符串数组中是否有空的字符如果有就返回True
+            </summary>
+            <param name="strings">字符串数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Json(System.String)">
+            <summary>
+            将JSON转成动态对象(效率高)
+            </summary>
+            <param name="json">JSON字符串</param>
+            <returns>动态对象</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Json(System.Object,System.String)">
+            <summary>
+            将对象转成JSON
+            </summary>
+            <param name="objects">待转换对象</param>
+            <param name="dateTimeFormat">是否格式化时间</param>
+            <returns>JSON字符串</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Json``1(System.String)">
+            <summary>
+            将JSON转换成指定对象
+            </summary>
+            <typeparam name="T">对象类型</typeparam>
+            <param name="json">JSON字符串</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Md5(System.String)">
+            <summary>
+            Md5加密
+            </summary>
+            <param name="original">待加密字符串</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Sha1(System.String)">
+            <summary>
+            Sha1加密
+            </summary>
+            <param name="original">待加密字符串</param>
+            <returns>加密后的字符</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.QuickGet(System.String)">
+            <summary>
+            GET方式请求页面源码
+            </summary>
+            <param name="url">请求URL</param>
+            <returns>页面源码</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Encrypt(System.String)">
+            <summary>
+            字符串加密
+            </summary>
+            <param name="original">待加密字符串</param>
+            <returns>加密好的字符串</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Decrypt(System.String)">
+            <summary>
+            解密有Utils.Encrypt()加密的内容
+            </summary>
+            <param name="encrypted">加密过的数据</param>
+            <returns>解密好的字符串</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.SetCookie(System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            设置一个Cookie
+            </summary>
+            <param name="name">名字</param>
+            <param name="value">值</param>
+            <param name="expires">过期时间（为0是为会话Cookie）</param>
+            <param name="encrypted">是否加密</param>
+        </member>
+        <member name="M:NapiService.WebHelper.GetCookie(System.String,System.Boolean)">
+            <summary>
+            获取一个Cookie值
+            </summary>
+            <param name="name">名字</param>
+            <param name="decrypted">是否解密</param>
+            <returns>Cookie值</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.GetHttpCapabilitiesBase">
+            <summary>
+            获取HttpCapabilitiesBase
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NapiService.WebHelper.IsMobileDevice">
+            <summary>
+            判断访问设备是否为移动设备
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NapiService.WebHelper.GetPlatform">
+            <summary>
+            获取平台信息
+            </summary>
+            <returns>平台信息</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.IP">
+            <summary>
+            获取客户端IP
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NapiService.WebHelper.GetIpInfo(System.String)">
+            <summary>
+            获取IP信息(国家、地区、城市)
+            </summary>
+            <param name="ipAddress">IP地址</param>
+            <returns>IP详情</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.MobileSafe(System.String)">
+            <summary>
+            隐藏手机号(如:1381341****)
+            </summary>
+            <param name="mobile">手机号</param>
+            <returns>隐藏后的手机号</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.CNZZ(System.String)">
+            <summary>
+            创建CNZZ统计代码
+            </summary>
+            <param name="site">站点ID</param>
+            <returns>CNZZ统计代码</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.To``1(System.Object,``0)">
+            <summary>
+            对象转换
+            </summary>
+            <typeparam name="T">转换类型</typeparam>
+            <param name="s">带转换对象</param>
+            <param name="defValue">转换失败给定默认值</param>
+            <returns>转换后的数据</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.Xor(System.String,System.Int32)">
+            <summary>
+            异或加密
+            </summary>
+            <param name="original">加密字符串</param>
+            <param name="expires">失效时间(秒)</param>
+            <returns>加密</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.XorMd5(System.String)">
+            <summary>
+            异或后MD5
+            </summary>
+            <param name="original"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NapiService.WebHelper.TimeMd5(System.String,System.Int32)">
+            <summary>
+            失效MD5（能过期）
+            </summary>
+            <param name="original">被加密字符串</param>
+            <param name="expires">失效时间</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.M(System.String)">
+            <summary>
+            接口MD5（实际为34位）
+            </summary>
+            <param name="s">待签名字符串</param>
+            <returns>加密后的字符串</returns>
+        </member>
+        <member name="M:NapiService.WebHelper.M2(System.String,System.String)">
+            <summary>
+            接口MD5验证
+            </summary>
+            <param name="s">待签名字符串</param>
+            <param name="sign">提交sign字符串</param>
+            <returns>是否通过验证</returns>
+        </member>
+        <member name="T:NapiService.IPAddressInfo">
+            <summary>
+            IP详情(国家、地区、城市)
+            </summary>
+        </member>
+        <member name="P:NapiService.IPAddressInfo.Country">
+            <summary>
+            国家
+            </summary>
+        </member>
+        <member name="P:NapiService.IPAddressInfo.CountryId">
+            <summary>
+            国家ID
+            </summary>
+        </member>
+        <member name="P:NapiService.IPAddressInfo.Area">
+            <summary>
+            区域
+            </summary>
+        </member>
+        <member name="P:NapiService.IPAddressInfo.City">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="T:NapiService.DynamicJsonConverter">
+            <summary>
+            动态类型转换器(用于动态转换Json用)
+            </summary>
+        </member>
+        <member name="M:NapiService.DynamicJsonConverter.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Type,System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            
+            </summary>
+            <param name="dictionary"></param>
+            <param name="type"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NapiService.DynamicJsonConverter.Serialize(System.Object,System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="P:NapiService.DynamicJsonConverter.SupportedTypes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:NapiService.DynamicJsonObject">
+            <summary>
+            动态json对象(用于动态转换Json用)
+            </summary>
+        </member>
+        <member name="M:NapiService.DynamicJsonObject.#ctor(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            
+            </summary>
+            <param name="dictionary"></param>
+        </member>
+        <member name="M:NapiService.DynamicJsonObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            
+            </summary>
+            <param name="binder"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="P:NapiService.DynamicJsonObject.Item(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

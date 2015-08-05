@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="description" content="中国最专业的女性原创言情小说网站，拥有上万名知名作者签约首发，拥有超过20万部的言情小说书库，是最大的中文女性言情小说网站" />
+    <meta name="keywords" content="言情小说阅读,言情小说下载,手机小说,穿越小说，都市小说" />
+    @RenderSection("styles", required: false)
+    @Styles.Render("~/Css/Css2.css")
+    @Scripts.Render("~/Scripts/jQuery.Min.js")
+    @Scripts.Render("~/Script/JX.js")
+</head>
+<body>
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+
+    @Html.Action("SettingsCommon", "Master")
+</body>
+</html>

@@ -1,0 +1,208 @@
+﻿@model int[]
+@{
+    ViewBag.Title = "更多精品页";
+    int type = Model[0];
+    int sort = Model[1];
+}
+@section styles{
+    @Styles.Render("~/Content/css/css.css")
+    @Styles.Render("~/Content/css/floatbtn.css")
+}
+<div class="item_box" id="orderlist">
+    <div class="tab_content">
+        <div class="item_list" id="books">
+            @Html.Action("GetMoreJingPinView", "Book", new { type = type, sort = sort })
+        </div>
+    </div>
+    <a id="lnkMore" class="nomorelist" onclick="getNextBook();">
+        <p>点击查看更多</p>
+    </a>
+</div>
+<div class="moretj">
+    <ul>
+        <li style="@(type == (int)RecommendClass.Fine ? "display:none" : "")"><a href="javascript:;" data-index="0" data-class="@((int)RecommendClass.Fine)" class="morebox_boutique">更多精品推荐</a></li>
+        <li style="@(type == (int)RecommendClass.Finished ? "display:none" : "")"><a href="javascript:;" data-index="1" data-class="@((int)RecommendClass.Finished)" class="morebox_end">更多热门完结文</a></li>
+        <li style="@(type == (int)RecommendClass.Ancient ? "display:none" : "")"><a href="javascript:;" data-index="2" data-class="@((int)RecommendClass.Ancient)" class="morebox_ancient">更多古言推荐</a></li>
+        <li style="@(type == (int)RecommendClass.Modern ? "display:none" : "")"><a href="javascript:;" data-index="3" data-class="@((int)RecommendClass.Modern)" class="morebox_modern">更多现代推荐</a></li>
+        <li style="@(type == (int)RecommendClass.Occult ? "display:none" : "")"><a href="javascript:;" data-index="4" data-class="@((int)RecommendClass.Occult)" class="morebox_fantasy">更多玄幻推荐</a></li>
+        <li><a href="@Url.Action("Category", "Book")" class="morebox">去“小说分类”挖掘更多好文</a></li>
+    </ul>
+</div>
+<!-- 浮动区  -->
+<div class="up"><a href="javascript:;" class="floatbtn btn_up" id="_goTop">&nbsp;</a></div>
+<div class="rightbtn">
+    <ul>
+        <li><a href="javascript:;" class="floatbtn @(sort == (int)SearchSort.VipSameDay_Desc ? "current" : "")" data-index="0" data-sort="@((int)SearchSort.VipSameDay_Desc)">热门</a></li>
+        <li><a href="javascript:;" class="floatbtn @(sort == (int)SearchSort.VipSameDayDescAndUpdateTimeDesc ? "current" : "")" data-index="1" data-sort="@((int)SearchSort.VipSameDayDescAndUpdateTimeDesc)">最新</a></li>
+    </ul>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script>
+        var _type = @(type);
+        var _sort = $(".rightbtn .current").attr("data-sort");
+        var _isLoading = 0, _index = 0, _size = 10;
+        var _timer;
+        var _index_X = $(".moretj li:hidden > a").attr("data-index");
+        var _index_Y = $(".rightbtn .current").attr("data-index");
+        var _books = [];
+        $(".moretj a[data-index]").each(function(){
+            var _booklist = [];
+            $(".rightbtn a").each(function(){
+                _booklist.push({ index : 0, nomore: false, items : [] });
+            })
+            _books.push(_booklist);
+        });
+        _books[_index_X][_index_Y].index = 1;
+        _books[_index_X][_index_Y].items.push($("#books").html());
+
+        var _state = {
+            cidIndex : _index_X,
+            sortIndex : _index_Y
+        }
+        history.replaceState(_state,"title",document.URL);
+        
+        var getBooks = function (callback) {
+            $.get('@Url.Action("GetMoreJingPinView", "Book")', $.param({ type: _type, sort : _sort, index: _index, size: _size }),
+                function (response) {
+                    _isLoading = 0;
+                    
+                    _books[_index_X][_index_Y].index = _index;
+                    if (response != "") {
+                        _books[_index_X][_index_Y].items.push(response);
+                        $("#books").append(response);
+                        if ($(".pic_txt[data-total]").length > 0) {
+                            _books[_index_X][_index_Y].nomore = true;
+                            $("#lnkMore > p").addClass("nomore").html("没有更多了！");
+                        }
+                    }
+                    else{
+                        _books[_index_X][_index_Y].nomore = true;
+                        $("#lnkMore > p").addClass("nomore").html("没有更多了！");
+                    }
+
+                    if (typeof callback == "function")
+                        callback();
+                });
+        };
+
+        var getNextBook = function () {
+            if (_isLoading == 1) return;
+            if(_books[_index_X][_index_Y].nomore) return;
+            _isLoading = 1;
+            _index++;
+            $("#lnkMore > p").addClass("ldg").html("正在加载...");
+            getBooks(function () {
+                if(_books[_index_X][_index_Y].nomore) {
+                    $("#lnkMore > p").removeClass("ldg").html("没有更多了！");
+                } else {
+                    $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                }
+
+                _isLoading = 0;
+            });
+        }
+
+        //var _timer = setInterval(function () {
+        //    if (_isLoading == 1) return;
+        //    if ($(window).height() + $(window).scrollTop() > $("#lnkMore > p").offset().top) {
+        //        if (!_books[_index_X][_index_Y].nomore && _index < 6) {
+        //            getNextBook();
+        //        }
+        //    }
+        //}, 200);
+
+        $(function(){
+            $("#_goTop").click(function () {
+                $("body").animate({ scrollTop: 0 }, 200);
+            });
+
+            $("a[data-index]").click(function(){
+                if (_isLoading == 1) return;
+                $("body").scrollTop(0);
+                if ($(".rightbtn a").index(this) >= 0) {
+                    $(".rightbtn a").removeClass("current");
+                    $(this).addClass("current");
+                    _sort = $(this).attr("data-sort");
+                    _index_Y = $(this).attr("data-index");
+                } else {
+                    $(this).parent().hide().siblings().show();
+                    _type = $(this).attr("data-class");
+                    _index_X = $(this).attr("data-index");
+                    if(_type == '@RecommendClass.Finished'){
+                        var $sort = $(".rightbtn a[data-sort='@((int)SearchSort.VipSameDay_Desc)']");
+                        $(".rightbtn a").removeClass("current");
+                        $sort.addClass("current");
+                    } else {
+                        var $sort = $(".rightbtn a[data-sort='@((int)SearchSort.VipSameDayDescAndUpdateTimeDesc)']");
+                        $(".rightbtn a").removeClass("current");
+                        $sort.addClass("current");
+                    }
+                    _sort = $(".rightbtn .current").attr("data-sort");
+                    _index_Y = $(".rightbtn .current").attr("data-index");
+                }
+
+                _index = _books[_index_X][_index_Y].index;
+                $("#books").html(_books[_index_X][_index_Y].items.join(""));
+                if (_books[_index_X][_index_Y].nomore == true) {
+                    $("#lnkMore > p").addClass("nomore").html("没有更多了！");
+                } else {
+                    $("#lnkMore > p").removeClass("nomore").html("点击查看更多");
+                }
+
+                if (_index == 0 && _books[_index_X][_index_Y].items.length == 0) {
+                    _isLoading = 1;
+                    $("#lnkMore > p").addClass("ldg").html("正在加载...");
+                    //Util.Loading();
+                    getBooks(function () {
+                        _isLoading = 0;
+                        if(_books[_index_X][_index_Y].nomore) {
+                            $("#lnkMore > p").removeClass("ldg").html("没有更多了！");
+                        } else {
+                            $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                        }
+                        //Util.LoadingClear();
+                    });
+                }
+
+                var _state = {
+                    cidIndex : _index_X,
+                    sortIndex : _index_Y
+                }
+                history.pushState(_state,"title",document.URL);
+            });
+        });
+
+        window.onpopstate = function(evt){
+            if (_isLoading == 1) return;
+            if(_state){
+                _index_Y = evt.state.sortIndex;
+                _index_X = evt.state.cidIndex;
+                $(".rightbtn a").removeClass("current");
+                var $cidcurrent = $(".moretj a[data-index=" + _index_X + "]");
+                var $sortcurrent = $(".rightbtn a[data-index=" + _index_Y + "]");
+                $cidcurrent.parent().hide().siblings().show();
+                $sortcurrent.addClass("current");
+                
+                _index = _books[_index_X][_index_Y].index;
+                $("#books").html(_books[_index_X][_index_Y].items.join(""));
+                if (_index == 0 && _books[_index_X][_index_Y].items.length == 0) {
+                    _isLoading = 1;
+                    _type = $cidcurrent.attr("data-class");
+                    _sort = $sortcurrent.attr("data-sort");
+                    $("#lnkMore > p").addClass("ldg").html("正在加载...");
+                    //Util.Loading();
+                    getBooks(function () {
+                        _isLoading = 0;
+                        if(_books[_index_X][_index_Y].nomore) {
+                            $("#lnkMore > p").removeClass("ldg").html("没有更多了！");
+                        } else {
+                            $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                        }
+                        //Util.LoadingClear();
+                    });
+                }
+            }
+        }
+    </script>
+}

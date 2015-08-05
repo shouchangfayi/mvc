@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "猜你喜欢页";
+}
+@section styles{
+    @Styles.Render("~/Content/css/css.css")
+}
+<div class="item_box" id="ulike" data-index="1">
+    <ul class="xihuan">
+        @Html.Action("GetGuessLikeView", "Book", new { count = 15, effecttype = 291 })
+    </ul>
+    <a id="lnkMore" class="nomorelist" onclick="getNextLikeBook();">
+        <p>点击查看更多</p>
+    </a>
+</div>
+@section scripts{
+    <script>
+        var _isLoading = 0;
+        $current = $("#ulike");
+        var _index = parseInt($current.attr("data-index"));
+        var _effecttype = 291;
+        var _count = 15;
+        var _timer;
+
+        var getLikeBook = function (callback) {
+            $("#lnkMore > p").addClass("ldg").html("正在加载....");
+            _index = parseInt($current.attr("data-index"));
+
+            $.get('@Url.Action("GetGuessLikeView", "Book")', $.param({ effecttype: _effecttype, count: _count }),
+                function (response) {
+                    _isLoading = 0;
+                    $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                    _index++;
+                    $current.attr("data-index", _index);
+
+                    if (response != "")
+                        $(".xihuan").append(response);
+
+                    if (typeof callback == "function")
+                        callback();
+                });
+        }
+
+        // 获取榜单下一页数据
+        var getNextLikeBook = function () {
+            if (_isLoading == 1)
+                return;
+            _isLoading = 1;
+            getLikeBook();
+        }
+
+        $(function () {
+            _timer = setInterval(function () {
+                if (_isLoading == 1)
+                    return;
+
+                if ($(window).height() + $(window).scrollTop() > $("#lnkMore > p").offset().top) {
+                    _index = parseInt($current.attr("data-index"));
+
+                    if (_index < 6)
+                        getNextLikeBook();
+                }
+            }, 200);
+        });
+    </script>
+}

@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "潇湘书院";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8"/>
+    <title>ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/> 
+    @Styles.Render("~/Scripts/jquery.min.js")
+    <style type="text/css">
+        * { margin:0; padding:0; }
+        .error { width:90%; margin:50px auto; display:-webkit-box; -webkit-box-pack:center; }
+            .error > li { display:block; height:40px; }
+                .error > li:first-child > span { display:block; width:40px; height:40px; background:url(../css/images/kulian.png) no-repeat; background-size:40px auto; }
+                .error > li:last-child { padding-top:5px; font-weight:bold; font-size:18px; color:#666; color:#ff1100; }
+                    .error > li:last-child > p { color:#666; font-size:13px; font-weight:normal; }
+    </style>
+</head>
+<body>
+
+    <ul class="error">
+        <li><span></span></li>
+        <li>
+            <span id="spnMessage" runat="server">@(ViewBag.NotFoundMessage)</span>
+            <p></p>
+        </li>
+    </ul> 
+
+    <script type="text/javascript">
+
+        var _delay = 1;
+        var _timer;
+        //$(function () {
+
+        //    var height1 = $(window).height();
+        //    var height2 = $(".error").height();
+        //    var top = (height1 - height2) * 0.3;
+        //    $(".error").css({ marginTop: top + "px" });
+
+        //    _timer = setInterval(function () {
+        //        if (_delay <= 0) {
+        //            location.href = "/";
+        //            clearInterval(_timer);
+        //            return;
+        //        }
+        //        $("#spnTime").html(_delay--);
+        //    }, 1000);
+        //});
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+﻿@{
+    ViewBag.Title = "用户注册";
+}
+
+<div class="m10">
+    <div class="tab t3">
+        <ul>
+            <li class="animbg"></li>
+        </ul>
+        <ul id="tabRegister">
+            <li data-index="0" class="curr">一键注册</li>
+            <li data-index="1">手机号注册</li>
+            <li data-index="2">昵称注册</li>
+        </ul>
+    </div>
+    <div id="panels" class="m2">
+        <div class="box" style="padding: 10px;">
+            <div class="m8">
+                <a id="keyOneRegister" href="javascript:keyRegister()" class="button blue r3">发送短信一键注册</a>
+            </div>
+            <div class="wenxin ww bgwhite m15">
+                <h3>一键注册说明</h3>
+                <ul>
+                    <li>1、如点击发送按钮无效，请手工编辑短信内容<em>潇湘</em>发送到号码<em>12114</em>即可完成注册。</li>
+                    <li>2、发送一条短信即可完成注册。</li>
+                    <li>3、注册完成将收到成功提示短信。</li>
+                    <li>4、账号为手机号，密码为手机号后六位。</li>
+                </ul>
+            </div>
+            <div class="m10">
+                <a href="javascript:goLogin();" class="button color1 r3">已有账号前往登陆</a>
+            </div>
+        </div>
+        <div class="box" style="padding: 10px; display: none;">
+
+            <div data-step="1">
+                <ul class="group2 ww">
+                    <li>
+                        <input id="txtMobile" class="input r3" type="tel" value="" placeholder="请输入手机号" /></li>
+                    <li>
+                        <ul class="group g2 ww">
+                            <li>
+                                <input id="txtResult" class="input r3" type="tel" value="" placeholder="输入答案" /></li>
+                            <li>
+                                <img src="/Vercode" onclick="this.src = '/Vercode?r=' + new Date()" style="width: 100%; height: 38px;" /></li>
+                        </ul>
+                    </li>
+                    <li><a id="lnkCode" href="javascript:getCode();" class="button blue r3">获取短信验证码</a></li>
+                </ul>
+            </div>
+
+            <div data-step="2" style="display: none;">
+                <ul class="group2 ww">
+                    <li>
+                        <input id="txtVerifyCode" class="input r3" type="tel" value="" placeholder="请输入短信验证码" /></li>
+                    <li><a id="lnkRegister" href="javascript:register();" class="button blue r3">确定注册</a></li>
+                </ul>
+                <div class="wenxin bgwhite ww">
+                    <h3>温馨提示</h3>
+                    <ul>
+                        <li>1、账号的密码为手机号最后6位数字。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="group2 ww">
+                <li><a href="javascript:goLogin();" class="button color2 r3">已有账号前往登陆</a></li>
+            </ul>
+        </div>
+        <div class="box" style="padding: 10px; display: none;">
+            <ul class="group2 ww">
+                <li>
+                    <input id="txtNickname" class="input r3" type="text" value="" placeholder="昵称" /></li>
+                <li>
+                    <input id="txtPass2" class="input r3" type="text" value="" placeholder="密码" /></li>
+                <li>
+                    <input id="txtNickMobile" class="input r3" type="tel" value="" placeholder="手机号(错误手机号将不能找回密码)" /></li>
+                <li><a id="lnkRegister2" href="javascript:register2();" class="button blue r3">确定注册</a></li>
+                <li><a href="javascript:goLogin();" class="button color1 r3">已有账号前往登陆</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        var _referer = "@ViewBag.RefererUrl";
+        var _codeFlag = 0;
+        var _delay = 60;
+        var _channel = 6;//XiaoXiangJS.getChannel()
+        var _timer;
+        //获取验证码
+        var getCode = function () {
+
+            if (_codeFlag == 1) return;
+            var mobile = $("#txtMobile").val();
+
+            var result = $("#txtResult").val();
+
+            if (/\d{11}/gi.test(mobile) == false) {
+                Util.Alert("手机号不正确");
+                return;
+            }
+
+            if (result == "" || result == $("#txtResult").attr("data-text")) {
+                Util.Alert("答案不能为空");
+                return;
+            }
+
+            ajaxLocalService('user_sendregistercode', { mobile: mobile, rv: result },
+                function (responseData) {
+                    if (responseData.Code != 0) {
+                        Util.Alert(responseData.Message);
+                        return;
+                    }
+                    var res = responseData.Data;
+                    Util.Alert(res);
+
+                    _codeFlag = 1;
+                    _delay = 60; //60秒之内不能重复发送
+                    _timer = setInterval(
+                        function () {
+                            if (_delay <= 0) {
+                                clearInterval(_timer);
+                                _codeFlag = 0;
+                                $("#lnkCode").html("获取验证码");
+                                return;
+                            }
+                            $("#lnkCode").html("获取验证码(" + (_delay--) + ")");
+                        }, 1000);
+                    $("div[data-step='1']").hide()
+                        .siblings("div[data-step='2']").show();
+                });
+
+        }
+        // 一键注册
+        var keyRegister = function () {
+            location.href = "SMS:12114?body=8888";
+            return;
+        }
+        //手机注册
+        var register = function () {
+
+            var mobile = $("#txtMobile").val();
+            var verifyCode = $("#txtVerifyCode").val();
+
+            if (/\d{11}/gi.test(mobile) == false) {
+                Util.Alert("手机号不正确");
+                return;
+            }
+
+            if (verifyCode == "") {
+                Util.Alert("请输入验证");
+                return;
+            }
+
+            $("#lnkRegister").html("正在提交....");
+
+            ajaxService2({
+                method: 'user.register',
+                username: mobile, usrepassword: mobile.substring(mobile.length - 6),
+                usermail: mobile + "@@XXSY.NET", usrmobile: mobile, channel: _channel//XiaoXiangJS.getChannel()
+            }
+                , function (response) {
+                    $("#lnkRegister").html("确定注册");
+                    if (response.Code != 0) {
+                        Util.Alert(response.Message);
+                        try {
+                            XiaoXiangJS.loginFailed();
+                        }
+                        catch (e) { }
+                        return;
+                    }
+
+                    ajaxLocalService('user_login', { username: mobile, userpassword: mobile.substring(mobile.length - 6) },
+                        function (responseData) {
+
+                            if (responseData.Code != 0) {
+                                Util.Alert(responseData.Message);
+                                try {
+                                    XiaoXiangJS.loginFailed();
+                                }
+                                catch (e) { }
+                                return;
+                            }
+
+                            var res = responseData.Data;
+
+                            try {
+                                XiaoXiangJS.loginSuccess(res.Id, res.Name);
+                            }
+                            catch (e) { }
+
+                            Util.Alert("注册成功了");
+                            setTimeout(function () {
+                                if (_referer != "") {
+                                    location.href = _referer;
+                                }
+                            }, 1500);
+                        });
+                });
+        }
+        // 昵称注册
+        var register2 = function () {
+            var nickname = $("#txtNickname").val();
+            var userPass = $("#txtPass2").val();
+            var mobile = $("#txtNickMobile").val();
+
+            if (nickname == "" || nickname == $("#txtNickname").attr("data-text")) {
+                Util.Alert("昵称不能为空");
+                return;
+            }
+
+            if (/^[(0-9A-Za-z)(\u4e00-\u9fa5)]{2,}$/ig.test(nickname) == false) {
+                Util.Alert("昵称只能包含数字、字母、汉字！");
+                return;
+            }
+
+            if (userPass.length < 6) {
+                Util.Alert("密码不能少于6个字符");
+                return;
+            }
+
+            if (/^1\d{10}$/gi.test(mobile) == false) {
+                Util.Alert("不是一个有效的手机号！");
+                return;
+            }
+
+            $("#lnkRegister2").html("正在提交....");
+
+            ajaxService2({
+                method: "user.register",
+                username: nickname, usrepassword: userPass, usrmobile: mobile, channel: _channel//XiaoXiangJS.getChannel()
+            }
+                , function (response) {
+                    $("#lnkRegister2").html("确定注册");
+                    if (response.Code != 0) {
+                        Util.Alert(response.Message);
+                        try {
+                            XiaoXiangJS.loginFailed();
+                        }
+                        catch (e) { }
+                        return;
+                    }
+
+                    ajaxLocalService('user_login', { username: nickname, userpassword: userPass },
+                        function (responseData) {
+                            if (responseData.Code != 0) {
+                                Util.Alert(responseData.Message);
+                                try {
+                                    XiaoXiangJS.loginFailed();
+                                }
+                                catch (e) { }
+                                return;
+                            }
+
+                            var res = responseData.Data;
+
+                            try {
+                                XiaoXiangJS.loginSuccess(res.Id, res.Name);
+                            }
+                            catch (e) { }
+
+                            Util.Alert("注册成功了");
+                            setTimeout(function () {
+                                if (_referer != "") {
+                                    location.href = _referer;
+                                }
+                            }, 1500);
+                        });
+                });
+        }
+        //前往登录
+        var goLogin = function () {
+            location.href = "/Member?referer=" + _referer;
+        }
+        //初始化
+        $(function () {
+
+            $("#tabRegister").find("li").click(function () {
+                var sel = $(this);
+                var index = parseInt(sel.attr("data-index"));
+                var v = 33.3;
+                sel.parent().siblings("ul").find(".animbg").animate({ marginLeft: (index * v) + "%" }, 200
+                    , function () {
+                        sel.addClass("curr")
+                            .siblings().removeClass("curr");
+                    });
+                $("#panels > div").eq(index)
+                    .show()
+                        .siblings("div").hide();
+            });
+        });
+
+    </script>
+}

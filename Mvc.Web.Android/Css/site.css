@@ -1,0 +1,97 @@
+﻿
+/* 用户中心
+  ---------------------*/
+
+.account-base { background: #fff; padding: 10px 20px 10px 20px; }
+.account-base > p { line-height: 180%; color: #777; }
+.account-base > p:first-child { font-size: 18px; line-height: 240%; color: #494949; }
+.account-base .attr0 { padding-left: 10px; font-size: 18px; color: #ff760c; }
+
+.account-balance { padding: 10px 0; background: #dff6ff; /*border-top: 1px solid #ddd;*/ }
+.account-balance > ul { display: -webkit-box; list-style-type: none; }
+.account-balance > ul > li { width: 25%; text-align: center; box-sizing: border-box; position: relative; }
+.account-balance > ul > li:after { content: ""; display: inline-block; width: 1px; height: 30px; float: right; background: #ddd; position: absolute; right: 0; top: 7px; }
+.account-balance > ul > li:last-child:after { content: ""; width: 0; }
+
+.account-balance > ul > li > p { line-height: 140%; }
+.account-balance > ul > li > p:first-child { color: #f60; font-size: 18px; }
+.account-balance > ul > li > p:last-child { color: #777; font-size: 14px; }
+
+.expired { display: block; height: 30px; line-height: 30px; font-size: 14px; border: 1px solid #ddd; background: #fff; color: #f30; text-align: center; }
+
+.account-nav { background: #fff; padding: 0 20px; }
+.account-nav > a { display: block; border: none; text-decoration:none; color: #666; font-size: 16px; height: 30px; line-height: 30px; padding: 10px 10px 10px 40px; border-bottom: 1px solid #efefef; overflow: hidden; position: relative; }
+.account-nav > a:active { border: 1px solid #1466fa; }
+.account-nav > a:last-child { border-bottom: none; }
+.account-nav > a:after { content: ""; display: block; width: 12px; height: 12px; border-top: 1px solid #999; border-right: 1px solid #999; -webkit-transform: rotate(45deg); float: right; margin-top: 7px; }
+
+/*功能ICON*/
+.account-nav > a:before { content: ""; display: block; width: 25px; height: 25px; background-image: url(http://images.xxsy.net/mxxsynet/icon-accounts.png); background-repeat: no-repeat; background-size: auto 25px; position: absolute; left: 5px; top: 12px; }
+.icon-account-check:before { background-position: 0px 0px; }
+.icon-account-lottery:before { background-position: -25px 0px; }
+.icon-account-review:before { background-position: -50px 0px; }
+.icon-account-pay:before { background-position: -75px 0px; }
+.icon-account-ingot:before { background-position: -100px 0px; }
+.icon-account-monthly:before { background-position: -125px 0px; }
+.icon-account-service:before { background-position: -150px 0px; }
+.icon-account-setting:before { background-position: -175px 0px; }
+.icon-account-change:before { background-position: -200px 0px; }
+
+/*勋章*/
+span[class^='icon-medal-'] { display:inline-block; width:24px; height:24px; margin:0 1px; vertical-align:middle; background-image:url(http://images.xxsy.net/mxxsynet/icon-medals.png); background-repeat:no-repeat; background-size:auto 24px; }
+.icon-medal-review { background-position:0px 0px; }
+.icon-medal-assess { background-position:-24px 0; }
+.icon-medal-genuine { background-position: -48px 0; }
+.icon-medal-monthly { background-position: -72px 0; }
+
+/*等级*/
+span[class^='icon-vip-'] { display: inline-block; width: 27px; height: 20px; margin:0 1px; vertical-align:middle; background-image: url(http://images.xxsy.net/mxxsynet/icon-vips.png); background-repeat: no-repeat; background-size: auto 15px; }
+.icon-vip-1 { background-position: 0px 0px; }
+.icon-vip-2 { background-position: -27px 0px; }
+.icon-vip-3 { background-position: -54px 0px; }
+.icon-vip-4 { background-position: -81px 0px; }
+.icon-vip-5 { background-position: -108px 0px; }
+.icon-vip-6 { background-position: -135px 0px; }
+.icon-vip-7 { background-position: -162px 0px; }
+.icon-vip-8 { background-position: -189px 0px; }
+.icon-vip-9 { background-position: -216px 0px; }
+.icon-vip-10 { background-position:-243px 0px; }
+
+/* 用户登录
+  ---------------------*/
+
+.login-wrapper { padding: 20px 15px 10px 15px; }
+.login-wrapper p { padding:5px 0; }
+.login-wrapper-inputs { display:block; background:#fff; padding:0 5px;  }
+.login-wrapper-inputs > input { display: block; width:100%; height: 44px; padding:0 5px; border: none; box-sizing:border-box; -webkit-box-sizing:border-box; font-size:16px; }
+.login-wrapper-inputs > input:nth-child(1) { border-bottom:1px solid #dedede; }
+
+.login-wrapper .forgot { display:block; color:#a8a8a8; padding:5px; text-decoration:underline; }
+.login-wrapper .hr { margin-top:40px; }
+
+.login-other { padding:20px 0 0 0; text-align:center; }
+.login-other > a { display:inline-block; width:60px; height:60px; border:none; background-size:60px auto; }
+.icon-login-qq { background:url(http://images.xxsy.net/mxxsynet/qq.png) no-repeat; }
+
+/* 用户注册
+  ---------------------*/
+
+.register-wrapper { padding: 20px 15px 10px 15px; }
+.register-wrapper .hr { margin-top:20px; }
+
+/* 同意条款
+  ---------------------*/
+
+.agree { display:inline-block; line-height:30px; padding-left:30px; background:url(http://images.xxsy.net/mxxsynet/agree.png) no-repeat; background-size:30px auto;  }
+.disagree { display:inline-block; line-height:30px; padding-left:30px; background:url(http://images.xxsy.net/mxxsynet/agree.png) 0 -30px no-repeat; background-size:30px auto;  }
+.agree > input,
+.disagree > input { display: none; }
+
+/* 错误页
+  ---------------------*/
+
+.error-section { text-align: center; margin-top: 60px; }
+.error-section img { border: none; }
+.error-section > div { padding-top: 20px; }
+.error-section p { font-size: 14px; color: #999; line-height: 170%; }
+.error-section a { color: #1466fa; text-decoration: underline; }

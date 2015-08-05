@@ -1,0 +1,62 @@
+﻿@using Mvc.Web.Android.Models.Book;
+@{
+    ViewBag.Title = "免费页";
+    
+    var _count1 = 6;
+    var _count2 = 5;
+    var _maxcount = 100;
+}
+
+<!-- 免费专区内容 -->
+<div class="item_box" id="mianfei">
+    <div class="item_title">
+        <h1>免费专区</h1>
+        <p class="tit_more"><a href="@Url.Action("Category", "Book", new { Sort = (int)CategorySort.Free})" data-type="5">更多</a></p>
+    </div>
+    @Html.Action("GetEffectRecommend", "Book", new { count = _count1, maxcount = _maxcount, recommendType = (int)RecommendClass.Free })
+</div>
+<!-- 特价单本内容 -->
+<div class="item_box" id="tejia">
+    <div class="item_title">
+        <h1>特价单本</h1>
+        <p class="tit_more"><a href="@Url.Action("Category", "Book", new { Sort = (int)CategorySort.SpecialOffer})">更多</a></p>
+    </div>
+    <div class="tab">
+        <ul class="tabs">
+            <li>
+                <a href="javascript:;" class="current">1 元</a>
+                <a href="javascript:;">2 元</a>
+                <a href="javascript:;">3 元</a>
+            </li>
+            <li>
+                <a href="javascript:;">4 元</a>
+                <a href="javascript:;">5-6 元</a>
+                <a href="javascript:;">7-8 元</a>
+            </li>
+        </ul>
+        <div class="tab_content">
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 291 })
+            </div>
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 218 })
+            </div>
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 218 })
+            </div>
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 218 })
+            </div>
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 218 })
+            </div>
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 218 })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/index.js")
+}

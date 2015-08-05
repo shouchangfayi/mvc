@@ -1,0 +1,139 @@
+﻿/* 公共 */
+* { margin:0; padding:0; list-style-type:none; -webkit-tap-highlight-color:rgba(255, 0, 0, 0); }
+body { font-size: 15px; color: #4C4A4A; letter-spacing:normal; background: #EFEFEE; font-family:'Microsoft YaHei','Segoe UI'; }
+header, nav, section, footer { display:block; }
+ul, ol { list-style-position:inside; }
+em, stong { font-style:normal; font-weight:normal; }
+
+a, a:visited { color: #4c4a4a; }
+
+fieldset, img { border: none; padding: 0; margin: 0; }
+legend { display: none; }
+textarea { min-height: 75px; }
+
+.editor-label { margin: 1em 0 0 0; }
+.editor-field { margin: 0.5em 0 0 0; }
+.field-validation-valid { display: none; }
+.field-validation-error { color: #f00; }
+.input-validation-error { border: 1px solid #f00; background-color: #f66; }
+.validation-summary-errors { font-weight: normal; color: #f00; }
+.validation-summary-valid { display: none; }
+.validation-summary-errors > ul { padding:10px 0; }
+.validation-summary-errors > ul > li { text-align:center; }
+
+.hide{ display:none; }
+
+.float-right{ float:right; }
+.float-left { float: left; }
+
+.radius3{ border-radius:3px; -webkit-border-radius:3px; -o-border-radius:3px; }
+.radius4{ border-radius:4px; -webkit-border-radius:4px; -o-border-radius:5px; }
+.radius5{ border-radius:5px; -webkit-border-radius:5px; -o-border-radius:5px; }
+.radius6{ border-radius:6px; -webkit-border-radius:6px; -o-border-radius:6px; }
+.radius7{ border-radius:7px; -webkit-border-radius:7px; -o-border-radius:7px; }
+.radius8{ border-radius:8px; -webkit-border-radius:8px; -o-border-radius:8px; }
+
+.text-center{ text-align:center; }
+.text-left { text-align: left; }
+.text-right { text-align:right; }
+
+.padding-top5 { padding-top: 5px; }
+.padding-top6 { padding-top: 6px; }
+.padding-top8 { padding-top: 8px; }
+.padding-top10 { padding-top: 10px; }
+.padding-top12 { padding-top: 12px; }
+
+.padding-right5 { padding-right: 5px; }
+.padding-right6 { padding-right: 6px; }
+.padding-right8 { padding-right: 8px; }
+.padding-right10 { padding-right: 10px; }
+.padding-right12 { padding-right: 12px; }
+
+.padding-bottom5 { padding-bottom: 5px; }
+.padding-bottom6 { padding-bottom: 6px; }
+.padding-bottom8 { padding-bottom: 8px; }
+.padding-bottom10 { padding-bottom: 10px; }
+.padding-bottom12 { padding-bottom: 12px; }
+
+.padding-left5 { padding-left: 5px; }
+.padding-left6 { padding-left: 6px; }
+.padding-left8 { padding-left: 8px; }
+.padding-left10 { padding-left: 10px; }
+.padding-left12 { padding-left: 12px; }
+
+.margin-top5 { margin-top: 5px; }
+.margin-top6 { margin-top: 6px; }
+.margin-top8 { margin-top: 8px; }
+.margin-top10 { margin-top: 10px; }
+.margin-top12 { margin-top: 12px; }
+
+.margin-right5 { margin-right: 5px; }
+.margin-right6 { margin-right: 6px; }
+.margin-right8 { margin-right: 8px; }
+.margin-right10 { margin-right: 10px; }
+.margin-right12 { margin-right: 12px; }
+
+.margin-bottom5 { margin-bottom: 5px; }
+.margin-bottom6 { margin-bottom: 6px; }
+.margin-bottom8 { margin-bottom: 8px; }
+.margin-bottom10 { margin-bottom: 10px; }
+.margin-bottom12 { margin-bottom: 12px; }
+
+.margin-left5 { margin-left: 5px; }
+.margin-left6 { margin-left: 6px; }
+.margin-left8 { margin-left: 8px; }
+.margin-left10 { margin-left: 10px; }
+.margin-left12 { margin-left: 12px; }
+
+.font-size10 { font-size:10px; }
+.font-size12 { font-size:12px; }
+.font-size14 { font-size:14px; }
+.font-size16 { font-size:16px; }
+.font-size18 { font-size:18px; }
+.font-size20 { font-size:20px; }
+
+.red { color:#f00; }
+
+.link1 { color:#0059B1; text-decoration:underline; padding:0 5px; }
+.line2 { display:block; height:2px; background: -webkit-gradient(linear, 0 0, 0 100%, from(＃DCF3FC), to(＃C8DDE5)); }
+
+/*按钮相关*/
+.button { display:block; width:100%; height:44px; line-height:44px; padding:0 10px; text-decoration:none; box-sizing:border-box; -webkit-box-sizing:border-box; text-align:center; border:none; color:#494949; background:#73D1F7; font-size:16px; }
+.button-disabled { color:#ffffff; background:#d5d5d5; }
+.button-style-1 { color:#494949; background:#EAFAFF; }
+.button-style-2 { color:#494949; background:#A9E9FF; }
+.button-style-3 { color:#494949; background:#A9E9FF; }
+.button-style-4 { color:#494949; background:#A9E9FF; }
+
+/*分割线*/
+.hr { font-size:15px; height:30px; position:relative; text-align:center; overflow:hidden; }
+.hr > strong { font-weight:normal; color:#999; display:inline-block; padding:0 15px; margin:0 auto; background:#efefef; }
+.hr:after { content:""; width:100%; height:10px; border-bottom:1px solid #cfcfcf; position:absolute; z-index:-1; left:0; top:0;  }
+
+/*信息弹出框相关*/
+.messagebox-wrapper { border:none; }
+.messagebox-wrapper-body { position:absolute; z-index:9999; width:100%; text-align:center; box-sizing:border-box; -webkit-box-sizing:border-box; padding:0 10%; }
+.messagebox-wrapper-content { display:inline-block; line-height:150%; padding:20px; color:#fff; text-align:left; font-size:15px; background:rgba(50, 50, 50, 0.8); border-radius:5px; -webkit-border-radius:5px; }
+.messagebox-wrapper-cover { display:block; width:100%; position:absolute; z-index:9998; left:0; top:0; background:rgba(50,50,50,0.4); }
+
+/*输入框*/
+.input-style-1 { width:100%; height:44px; line-height:44px; padding:0 5px; border:none; font-size:16px; color:#494949; background:#fff; box-sizing:border-box; -webkit-box-sizing:border-box; border-radius:5px; -webkit-border-radius:5px; }
+
+/*分组2*/
+ul.input-group-2 { display:-webkit-box; }
+ul.input-group-2 > li { display:block; width:50%; box-sizing:border-box; -webkit-box-sizing:border-box; }
+ul.input-group-2 > li:nth-child(1) { padding-right:4px; }
+ul.input-group-2 > li:nth-child(2) { padding-left:4px; }
+
+/*分组3*/
+ul.input-group-3 { display:-webkit-box; }
+ul.input-group-3 > li { display:block; width:33.3%; box-sizing:border-box; -webkit-box-sizing:border-box; }
+ul.input-group-3 > li:nth-child(1) { padding-right:4px; }
+ul.input-group-3 > li:nth-child(2) { padding:0 2px; }
+ul.input-group-3 > li:nth-child(3) { padding-left:4px; }
+
+/*验证码样式*/
+.vc { height:44px; width:100%; border:none; }
+
+/*表单相关*/
+ul.input-groups > li { padding:5px 0; }

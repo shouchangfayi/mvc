@@ -1,0 +1,58 @@
+*{ margin:0; padding:0;}
+
+/*.floatbox{ padding:.1rem .3rem; width:6.9rem; font-size:.26rem; position:fixed; bottom:.3rem; z-index:99;}*/
+.up{ padding:0; height:.65rem; font-size:.26rem; position:fixed; left:.3rem; bottom:.3rem; z-index:99;}/*---回顶部浮动按钮区--*/
+.rightbtn{ padding:0; height:.65rem; border-radius:.1rem; -webkit-box-shadow:0 0 .15rem #999; position:fixed; right:.3rem; bottom:.3rem; z-index:99;}/*---右浮动按钮区--*/
+
+.floatbtn{ display:inline-block; background:#90d6f3; width:1.4rem; font-size:.28rem; font-weight:normal; text-align:center; color:#fff; line-height:.65rem;} 
+.floatbtn:hover{ background:#4fc2f1;}
+.btn_up{ display:inline-block; background:#90d6f3 url(../images/pic.png) no-repeat .15rem -7.95rem; background-size:1rem auto; width:.65rem; height:.65rem; border-radius:0.65rem; -webkit-box-shadow:0 0 .15rem #999;  }/*加顶部按钮*/
+.btn_up:hover{ background:#4fc2f1 url(../images/pic.png) no-repeat .15rem -7.95rem; background-size:1rem auto; width:.65rem; height:.65rem; }
+.btn_hot{ display:inline-block; background:#90d6f3; width:1.15rem; height:.65rem; font-size:.24rem; border-radius:.1rem 0 0 .1rem; }/*热门按钮*/
+.btn_allsort{ display:inline-block; background:#90d6f3; width:1.65rem; height:.65rem; border-radius:0 .1rem .1rem 0;}
+.btn_commpraise span{display: inline-block; float: left;letter-spacing:.01rem; margin-left: .05rem;}  
+.btn_commpraise{ display:inline-block; background:#90d6f3; width:1.25rem; height:.65rem; border-radius:0 .1rem .1rem 0;font-size:.20rem; padding-left:.05rem; }
+.btn_commpraise .comment{background:url(../images/pic.png) no-repeat center -14.8rem; background-size:1rem auto;  width: .4rem; height: .33rem; margin-top:.18rem; } 
+.btn_commpraise .praise{background:url(../images/pic.png) no-repeat center -15.24rem; background-size:1rem auto;  width: .4rem; height: .33rem; margin-top:.18rem; } 
+.comment_num{text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width: .7rem;} 
+.praise_num{text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width: .7rem;} 
+.btn_commpraise .actived{background:url(../images/pic.png) no-repeat center -15.68rem;background-size:1rem auto; } 
+.btn_commpraise .wordactived{color: #f5918c;}/*全部类别按钮*/
+.current{ background:#4fc2f1;}/*当前铵钮背景色*/
+
+.rightbtn ul{ display:block; height:.65rem;}
+.rightbtn ul li{ float:left; font-size:.25rem; position:relative;}
+.rightbtn > ul > li:nth-child(2){ border-left:.02rem solid #fff;}/*右浮动按钮中间白线*/
+.rightbtn ul li div{ display:none;}
+.rightbtn ul li:hover div{ display:block; position: absolute; bottom:.68rem;}
+.rightbtn ul li div.clicked{ display:block; position: absolute; bottom:.68rem;}
+
+
+.rightbtn ul li:first-child .floatbtn{ border-radius:.1rem 0 0 .1rem;}/*---右浮动按钮区左按钮弧角--*/
+.rightbtn ul li:last-child .floatbtn{ border-radius:0 .1rem .1rem 0;}/*---右浮动按钮区右按钮弧角--*/
+
+/*----浮动弹出菜单区----*/
+.popnav{ display:table; padding-bottom:.3rem;}
+.popnav ul{ display:table; padding:0 .15rem; background:#ecf9ff; border-radius:.1rem; box-shadow:0 0 .12rem #aaa; position:relative;}
+.popnav ul li{ display:block; float:none; padding:.2rem 0; border-bottom:1px solid #e5e5e5; text-align:center; font-size:.28rem; color:#4fc2f1; letter-spacing:0.2rem; word-spacing:0.5rem;}
+.popnav ul li:last-child{ border-bottom:none;}
+.popnav ul li a{ color:#4fc2f1; letter-spacing:.06rem;}
+.popnav ul li a:hover{ color:#1d8dbc;}
+.popnav ul li a.current_sort{ color:#1d8dbc;}
+
+#hotnav{ width:1.15rem;}/*热门弹出菜单区*/
+#hotnav ul{ width:.85rem; box-shadow:0 0 .12rem #aaa;}
+#hotnav ul li{ font-size:.26rem; }
+#sortnav{ width:1.65rem;}/*全部类别弹出菜单区*/
+#sortnav ul{ width:1.35rem; box-shadow:0 0 .12rem #aaa;}
+#sortnav ul li{ font-size:.28rem; }
+
+.popnav ul li.arrowdown{ position:absolute; left:35%; bottom:-0.29rem; padding:0; width:0.4rem; height:0.32rem; background:url(../images/pic.png) no-repeat 0 -7.59rem; background-size:1rem auto; overflow:hidden;}/*弹出菜单区向下小三角*/
+
+/*----横版分类----*/
+.morethan10{ width:4.8rem; position:absolute; right:0;}
+.morethan10 ul{ padding:0; width:4.82rem; box-shadow:0 0 .12rem #aaa; position:relative;}
+.morethan10 ul li{ float:left; display:block; width:1.6rem; height:.5rem; font-size:.28rem; border-bottom:none; }
+.morethan10 ul li a{ padding:0 .45rem; border-right:1px solid #90d6f3; letter-spacing:.03rem;}
+.morethan10 ul li:nth-child(3n) a{ border-right:none;}
+.morethan10 ul li.arrowdown{ position:absolute; left:3.8rem; bottom:-0.29rem; }

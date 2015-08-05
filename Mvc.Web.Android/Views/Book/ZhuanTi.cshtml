@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "专题页";
+}
+@section styles{
+    @Styles.Render("~/Content/css/floatbtn.css")
+    @Styles.Render("~/Content/css/style.css")
+}
+<div class="banner">
+    <img width="100%" src="http://images.xxsy.net/mxxsynet/jingxuan.jpg" style="border: none;">
+</div>
+<div class="magic_tit"><span class="firstwords">幻</span>界无尽，斗魂不止；炮灰仙途，成就东方极品女仙；神魔双修，打造幻界全能女神。东西方魔幻巨作重磅来袭，萌兽、美男应有尽有，女神联盟，让英雄夜夜销魂！</div>
+<div class="item_box">
+    <div class="item_title">
+        <h1>魔幻</h1>
+    </div>
+    <div class="work_txt">
+        <div class="pic_txt pic_txtauto">
+            <div class="picbox bookpic picboxsmall">
+                <img src="http://images.xxsy.net/bimg/684180.jpg" /><div class="poplabel end"></div>
+            </div>
+            <ul class="txtbox">
+                <li>
+                    <p class="bookname">绝色锋芒</p>
+                </li>
+                <li>
+                    <p class="author">无意宝宝</p>
+                    <p class="orderico read">1120万</p>
+                    <p class="orderico wordcount">1120万</p>
+                </li>
+                <li class="book_info book_infosmall">
+                    <p class="book_infowords">
+                        冷漠腹黑的她穿成花痴草包贵小姐，西方世界，锋芒展露，炼斗气，魔武双修，辟一条逆天之路。西玄环境作品构架，却有很强的故事代入感，以小见大逐步铺展主线情节，事件冲突不断，高潮迭起，可读性强。
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="editsaycont">
+            <div class="editarrow"></div>
+            <div class="editsay">
+                <p class="editsays_p">
+                    <span class="say_words">小编说：</span>
+                    “冷漠腹黑的她穿成花痴草包贵小姐，西方世界，锋芒展露，炼斗气，魔武双修，辟一条逆天之路。西玄环境作品构架却有很强的故事代入感，以小见大逐步铺展...
+                </p>
+                <p class="editsays_moredown "></p>
+            </div>
+            <div class="separate_line"></div>
+        </div>
+    </div>
+    <div class="work_txt">
+        <div class="pic_txt pic_txtauto">
+            <div class="picbox bookpic picboxsmall">
+                <img src="http://images.xxsy.net/bimg/684180.jpg" /><div class="poplabel end"></div>
+            </div>
+            <ul class="txtbox">
+                <li>
+                    <p class="bookname">盛世风华</p>
+                </li>
+                <li>
+                    <p class="author">无意宝宝</p>
+                    <p class="orderico read">1120万</p>
+                    <p class="orderico wordcount">1120万</p>
+                </li>
+                <li class="book_info book_infosmall">
+                    <p class="book_infowords">
+                        当生性懦弱、说话都结巴的她被轻狂腹黑、决绝果断的她替代，看她如何将懦弱自卑一无是处的她变得风华绝世，炼斗气，修魔法，看女主异世如何谱写自己的盛世风华。本文人物的个性鲜明有特色，作者文笔流畅，主线逻辑清新循序渐进，情节紧凑并富有张力，高潮爽点安排到位，看起来酣畅淋漓，必读佳作。
+                    </p>
+                </li>
+            </ul>
+
+        </div>
+        <div class="editsaycont">
+            <div class="editarrow"></div>
+            <div class="editsay">
+                <p class="editsays_p">
+                    <span class="say_words">小编说：</span>
+                    “当生性懦弱、说话都结巴的她被轻狂腹黑、决绝果断的她替代，看她如何将懦弱自卑一无是处的她变得风华绝世，炼斗气，修魔法，看女主异世如何谱写自己的盛世风华。本文人物的个性鲜明有特色，作者文笔流畅，主线逻辑清新循序渐进，情节紧凑并富有张力，高潮爽点安排到位，看起来酣畅淋漓，必读佳作。...
+                </p>
+                <p class="editsays_moredown"></p>
+            </div>
+            <div class="separate_line"></div>
+        </div>
+    </div>
+</div>
+<!-- 浮动区  -->
+<div class="up"><a href="#" class="floatbtn btn_up">&nbsp;</a></div>
+<div class="rightbtn">
+    <ul>
+        <li>
+            <a href="javascript:void(0);" class="floatbtn btn_commpraise">
+                <span class="comment"></span><span class="comment_num">88888</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" class="floatbtn btn_commpraise">
+                <span class="praise"></span><span class="praise_num">88888</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".btn_commpraise").click(function () {
+                $(this).find(".praise").hasClass("actived") ? $(this).find(".praise").removeClass("actived") : $(this).find(".praise").addClass("actived");
+                $(this).find(".praise_num").hasClass("wordactived") ? $(this).find(".praise_num").removeClass("wordactived") : $(this).find(".praise_num").addClass("wordactived");
+            });
+            $(".editsays_moredown").click(function () {
+                $(this).toggleClass("editsays_moreup");
+                var expand = $(this).hasClass("editsays_moreup");
+                if (expand) {
+                    $(this).parent(".editsay").find(".editsays_p").css("height", "auto")
+                }
+
+                else {
+                    $(this).parent(".editsay").find(".editsays_p").css("height", ".95rem");
+                }
+            });
+        })
+    </script>
+}

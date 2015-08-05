@@ -1,0 +1,697 @@
+﻿@model Mvc.Web.Android.Controllers.Info_OLDController.InfoDetail
+@{
+    Layout = null;
+    
+    string AuthorLevel = "签约";
+    // 获取作者等级
+    switch (Model.Book.AuthorLevel)
+    {
+        case 1:
+            AuthorLevel = "铜牌";
+            break;
+        case 2:
+            AuthorLevel = "银牌";
+            break;
+        case 3:
+            AuthorLevel = "金牌";
+            break;
+        default:
+            AuthorLevel = "签约";
+            break;
+    }
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>@Model.Book.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="description" content="@(Model.Book.Title)小说阅读,@(Model.Book.Title)最新章节阅读,@(Model.Book.Title)全文阅读" />
+    <meta name="keywords" content="@(Model.Book.Title)小说阅读,@(Model.Book.Title)小说下载" />
+    @Styles.Render("~/Css/Css2.css")
+    @Scripts.Render("~/Scripts/jquery.min.js")
+    @Scripts.Render("~/Script/JX.js")
+    @Scripts.Render("~/Script/Site.js")
+</head>
+<body>
+    @Html.Action("XuanChuan", "Master")
+    <div class="box m10" style="padding: 10px 0">
+        <div class="info i4" style="border-bottom: none;">
+            <a href="javascript:;">
+                <img src="http://images.xxsy.net/img/@(Model.Book.Id).jpg" />
+                <h3>@Model.Book.Title
+                    @if (Model.Book.SpecialOffer > 0)
+                    {
+                        <em id="spnTejia" class="tejia"></em>
+                    }
+                </h3>
+                <p>作者：@(Model.Book.Author) [@(AuthorLevel)]</p>
+                <p>类别：@(Model.Book.ClassName)</p>
+                <p>收藏：@(Model.Book.Favorites)&nbsp;&nbsp;&nbsp;字数：@(Model.Book.Words)</p>
+                <p>月票：@(Model.Book.Mons)&nbsp;&nbsp;&nbsp;点击：@(Model.Book.Clicks)</p>
+                @if (Model.Book.Status == "已完成")
+                {
+                    <em id="isWanjie" class="wj4"></em>
+                }
+            </a>
+        </div>
+        <div class="m10">
+            <ul class="group g3">
+                <li><a class="button blue r3" href="javascript:XiaoXiangJS.beginRead(@(Model.Book.Id));">开始阅读</a></li>
+                <li><a class="button green r3" href="javascript:XiaoXiangJS.directory(@(Model.Book.Id),1);">章节目录</a></li>
+                <li><a class="button color2 r3" href="javascript:;" onclick="setShelf();" id="lnkShelf" data-value="@(ViewBag.IsKeep ? "1" : "0")">@(ViewBag.IsKeep ? "取消收藏" : "加入书架")</a></li>
+            </ul>
+        </div>
+        <div class="m10">
+            <ul id="tejia" runat="server" class="@ViewBag.Tejia_Class">
+                @Html.Raw(ViewBag.Tejia_InnerHtml)
+            </ul>
+        </div>
+    </div>
+    <div class="m10">
+        <div class="tab t4">
+            <ul id="hudong1">
+                <li data-prop="0" data-index="0" class="curr2">简介</li>
+                <li data-prop="0" data-index="1">月票</li>
+                <li data-prop="0" data-index="2">打赏</li>
+                <li data-prop="0" data-index="3">钻石</li>
+            </ul>
+        </div>
+    </div>
+    <div id="panels" class="m2">
+        <div class="box">
+            <div class="new">
+                <a href="javascript:XiaoXiangJS.beginRead(@(Model.Book.Id),@(Model.LastChapterTags.Id));">
+                    <p class="name">最新章节：@(Model.LastChapterTags.Title)</p>
+                    <p class="time">更新时间：@(Model.LastChapterTags.CreateTime)</p>
+                </a>
+            </div>
+            <div class="line"></div>
+            <div class="intro box">
+                @Model.Book.Intro
+            </div>
+            <div class="sw">
+                <a id="showAll" href="javascript:;" data-value="0">显示全部</a>
+                <div style="display: none">
+                    <script type="text/javascript">
+                        $("#showAll").click(function () {
+                            var value = $(this).attr("data-value");
+                            if (value == 0) {
+                                $(this).attr("data-value", "1");
+                                $(this).html("隐藏部分");
+                                $(".intro").css({ height: "auto" });
+                                return;
+                            }
+                            $(this).attr("data-value", "0");
+                            $(this).html("显示全部");
+                            $(".intro").css({ height: "132px" });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="box" id="yuepiao" style="display: none;">
+            <div class="loading2">加载中......</div>
+        </div>
+        <div class="box" id="dashang" style="display: none;">
+            <div class="loading2">加载中......</div>
+        </div>
+        <div class="box" id="zuan" style="display: none;">
+            <div class="loading2">加载中......</div>
+        </div>
+        <div class="box" id="hua" style="display: none;">
+            <div class="loading2">加载中......</div>
+        </div>
+        <div class="box" id="pingjia" style="display: none;">
+            <div class="loading2">加载中......</div>
+        </div>
+        <div class="box" id="fensi" style="display: none;">
+            <div class="loading2">加载中......</div>
+        </div>
+    </div>
+
+    <div class="m2">
+        <div class="tab t3">
+            <ul id="hudong2">
+                <li data-prop="0" data-index="4">鲜花</li>
+                <li data-prop="0" data-index="5">评价</li>
+                <li data-prop="0" data-index="6">粉丝</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="m10">
+        <div class="title">最新评论<a class="more" href="javascript:XiaoXiangJS.comment(@(Model.Book.Id));">发表评论</a></div>
+        <div id="reviewlist" class="m2">
+            <div id="reviewMessage" class="loading2 bg01">加载中......</div>
+        </div>
+        <div style="width: 95%; height: 40px; margin: 0 auto 2px;">
+            <a href="xrules.aspx#fans" style="display: block; color: #00f; font-size: 15px; padding: 0 5%; height: 40px; line-height: 40px; vertical-align: middle; background: #fff;">[童生]
+                <span class="medal2"></span>
+                <span class="medal3"></span>
+                <span class="medal4"></span>
+                是什么意思？
+            </a>
+        </div>
+        <a id="reviewMore" class="loading" href="javascript:XiaoXiangJS.directory(@(Model.Book.Id),2);">更多评论...</a>
+    </div>
+
+    <div class="m10">
+        <div class="tab t2">
+            <ul>
+                <li class="animbg"></li>
+            </ul>
+            <ul id="tonglei">
+                <li data-index="0" class="curr">同类推荐</li>
+                <li data-index="1">作者其他</li>
+            </ul>
+        </div>
+        <div id="panels2" class="m2">
+            <div id="tongleituijian">
+            </div>
+            <div style="display: none;" id="zuozheqita">
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none;">
+        <script type="text/javascript">
+            $("#tonglei").find("li").click(function () {
+                var sel = $(this);
+                var index = parseInt(sel.attr("data-index"));
+                $("#panels2 > div").eq(index).show().siblings().hide();
+                sel.parent().siblings("ul").find(".animbg").animate({ marginLeft: (index * 50) + "%" }, 200
+                    , function () { sel.addClass("curr").siblings().removeClass("curr"); });
+            });
+        </script>
+    </div>
+
+
+    <script type="text/javascript">
+   
+        var _bookid = parseInt(@(Model.Book.Id));
+        var _userid = parseInt(@(ViewBag.User.ID));
+        var _count = 6;
+        var _parentid = 0;
+        var _index = 0;
+        var _size = 5;
+        var _medal = "";
+        var _site = 6;
+
+        //check
+        Util.checkUser(_userid);
+
+        var reviewFilter = function (str) {
+
+            var arrLines = [];
+            str = str.replace(/\&gt\;/gi, ">");
+            str = str.replace(/\&lt\;/gi, "<");
+            var lines = str.split(/\<p\>|\<br\>|\<br\/\>|\<div\>/gi);
+            if (lines != null) {
+                for (var i = 0; i < lines.length; i++) {
+                    var v = lines[i].replace(/<[^>]+>|\s+|\&[\d\w]{1,6}\;|　/gi, "");
+                    if (v != "")
+                        arrLines.push("<p>　　" + v + "</p>");
+                }
+            }
+            str = arrLines.join("");
+            var arr = str.match(/(http(s)?\:\/\/)?[\d\w]+\.[\d\w]+\.[\d\w]+[^\u4e00-\u9fa5\s\<\>]*/gi);
+            if (arr != null) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].indexOf(".xxsy.net") < 0)
+                        str = str.replace(arr[i], "");
+                }
+            }
+
+            return str;
+        }
+
+        // 获取评论
+        var getReview = function () {
+            ajaxService2({ method : "book.get.reviews", bookid: _bookid, index: _index, size: _size, parentid: _parentid },
+                function (response) {
+                    Util.LoadingClear();
+                    if (response.Code != 0) {
+                        Util.Alert(response.Message);
+                        return;
+                    }
+                    var res = response.Data;
+                    if (response.Attachments == 0) {
+                        $("#reviewMessage").html('暂无评论');
+                        $("#reviewMore").hide();
+                        return;
+                    }
+
+                    var htm = [];
+                    htm.push('<ul class="list2">');
+                    for (var i = 0; i < res.length; i++) {
+                        var item = res[i];
+                        var userName = item.UserName;
+                        if (/^\d{11}$/.test(userName)) {
+                            userName = userName.substring(0, userName.length - 4) + "****";
+                        }
+
+                        // 勋章
+                        _medal = "";
+                        var medalList = item.MedalList;
+                        if (medalList.length > 0) {
+                            for (var j = 0; j < medalList.length; j++) {
+                                var medalId = medalList[j].Id;
+                                switch (medalId) {
+                                    case 3: // 评价勋章
+                                        _medal = _medal + "<span class=\"medal2\"></span>";
+                                        break;
+                                    case 4: // 月票勋章
+                                        _medal = _medal + "<span class=\"medal3\"></span>";
+                                        break;
+                                    case 5: // 正版勋章
+                                        _medal = _medal + "<span class=\"medal4\"></span>";
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
+
+                        htm.push("<li>");
+                        htm.push('<div class="say"> [ ' + item.Level.Value + ' ] ' + userName + " " + _medal + '<em>' + item.InsertTime.substring(0, 10) + '</em></div>');
+                        htm.push('<div class="ctx">' + reviewFilter(item.Content) + '</div>');
+                        if (item.Reply != "" && item.Reply) {
+                            htm.push('<div class="reply">作者回复：' + reviewFilter(item.Reply) + '</div>');
+                        }
+                        htm.push("</li>");
+                    }
+                    htm.push('</ul>');
+                    $("#reviewlist").html(htm.join(""));
+                });
+        }
+
+        //设置书架
+        var setShelf = function () {
+            if (_userid == 0) {
+                Site.showLoginbox(function (uid) {
+                    _userid = uid;
+                    ajaxService2({method :"bookcase.exists", userid: _userid, bookid: _bookid }
+                        , function (response) {
+                            Util.LoadingClear();
+                            if (response.Code != 0) {
+                                Util.Alert(response.Message);
+                                return;
+                            }
+                            var res = response.Data;
+
+                            $("#lnkShelf").attr("data-value", res.result);
+                            $("#lnkShelf").html(res.result == 1 ? "取消收藏" : "加入书架");
+                        });
+                });
+                return;
+            }
+
+            var temp = $("#lnkShelf");
+            var value = parseInt(temp.attr("data-value"));
+
+            if (value == 1) {
+                temp.html("删除中...");
+                ajaxService2({ method : "bookcase.delete", userid: _userid, bookid: _bookid, site: _site }
+                    , function (response) {
+                        if (response.Code != 0) {
+                            $("#lnkShelf").html("取消收藏");
+                            Util.Alert(response.Message);
+                            return;
+                        }
+
+                        $("#lnkShelf").html("加入书架");
+                        $("#lnkShelf").attr("data-value", 0);
+                        Util.Alert("成功取消收藏");
+                        XiaoXiangJS.removeFromBookShelf(@(Model.Book.Id));
+                    });
+                    return;
+                }
+
+            temp.html("添加中...");
+            ajaxService2({ method : "bookcase.set", userid: _userid, bookid: _bookid, site: _site, chapterid : 0 }
+                , function (response) {
+                    if (response.Code != 0) {
+                        $("#lnkShelf").html("取消收藏");
+                        $("#lnkShelf").attr("data-value", 1);
+                        Util.Alert(response.Message);
+                        return;
+                    }
+
+                    $("#lnkShelf").html("取消收藏");
+                    $("#lnkShelf").attr("data-value", 1);
+                    Util.Alert("成功加入书架");
+                    XiaoXiangJS.addToBookShelf(@(Model.Book.Id))
+                });
+
+        }
+        
+            // 发表评论
+            var sendReview = function () {
+                if (_userid == 0) {
+                    Site.showLoginbox(
+                        function (uid) {
+                            _userid = uid;
+                            setTimeout(function () {
+                                sendReview();
+                            }, 200); 
+                        });
+                    return;
+                }
+                Site.showSendReviewbox(_userid, _bookid
+                    , function () { });
+            }
+            // 显示送道具窗口
+            var sendProps = function (type) {
+                if (_userid == 0) {
+                    Site.showLoginbox(function (uid) {
+                        _userid = uid;
+                        setTimeout(function () {
+                            Site.showPropsbox(_userid, _bookid, type);
+                        }, 200);
+                    });
+                    return;
+                }
+                Site.showPropsbox(_userid, _bookid, type);
+            }
+        
+            // 获取同类推荐
+            var getSameRecommendtion = function () {
+                ajaxService2({ method : "book.get.same.recommendtion", bookid: _bookid, count: 5, maxCount: 100 },
+                    function (response) {
+                        Util.LoadingClear();
+                        if (response.Code != 0) {
+                            Util.Alert(response.Message);
+                            return;
+                        }
+                        var res = response.Data;
+
+
+                        var htm = [];
+                        for (var i = 0; i < res.length; i++) {
+                            var item = res[i];
+
+                            htm.push('<div class="info i3">');
+                            htm.push('<a href="/Info_OLD?bookid='+ item.Id +'">');
+                            htm.push('<img src="http://images.xxsy.net/simg/'+ item.Id +'.jpg" />');
+                            htm.push('<h3>'+ item.Title +'</h3>');
+                            htm.push('<p>作者：'+ item.Author +'</p>');
+                            htm.push('<p>字数：'+ item.Words +'</p>');
+                            if (item.Status == "已完成") 
+                                htm.push('<em class="wj3" style="display: block;"></em>');
+                            else
+                                htm.push('<em class="wj3" style="display: none;"></em>');
+
+                            htm.push("</a></div>");
+                        }
+
+                        $("#tongleituijian").html(htm.join(""));
+                    });
+            }
+
+            // 获取作者其他
+            var getAuthorOtherBooks = function () {
+                ajaxService2({ method : "book.get.author.other", bookid: _bookid },
+                    function (response) {
+                        Util.LoadingClear();
+                        if (response.Code != 0) {
+                            Util.Alert(response.Message);
+                            return;
+                        }
+                        var res = response.Data;
+
+
+                        var htm = [];
+                        if(res.length > 0) {
+                            for (var i = 0; i < res.length; i++) {
+                                var item = res[i];
+
+                                htm.push('<div class="info i3">');
+                                htm.push('<a href="/Info_OLD?bookid='+ item.Id +'">');
+                                htm.push('<img src="http://images.xxsy.net/simg/'+ item.Id +'.jpg" />');
+                                htm.push('<h3>'+ item.Title +'</h3>');
+                                htm.push('<p>类别：'+ item.ClassName +'</p>');
+                                htm.push('<p>字数：'+ item.Words +'</p>');
+                                if (item.Status == "已完成") 
+                                    htm.push('<em class="wj3" style="display: block;"></em>');
+                                else
+                                    htm.push('<em class="wj3" style="display: none;"></em>');
+
+                                htm.push("</a></div>");
+                            }
+                        }
+                        else {
+                            htm.push('<div class="loading2 bg01" style="display: block;">暂无其他作品</div>');
+                        }
+
+                        $("#zuozheqita").html(htm.join(""));
+                    });
+            }
+
+            // 初始化
+            $(function () {
+                setTimeout(getReview(),0);
+                setTimeout(getSameRecommendtion(),0);//获取同类推荐
+                setTimeout(getAuthorOtherBooks(),0);//获取作者其他
+                $("li[data-prop=0]").click(
+                    function () {
+                        var datacount = 0;
+                        var allgiftcount = 0;
+                        var error = 0;
+
+                        $("li[data-prop=0]").removeClass("curr2");
+                        $(this).addClass("curr2");
+                        var _dataindex = parseInt($(this).attr("data-index"));
+                        $("#panels > div").eq(_dataindex).show().siblings().hide();
+
+                        var _gifttype = 0;
+                        switch (_dataindex) {
+                            case 0:
+                                _gifttype = 99;
+                                break;
+                            case 1:
+                                _gifttype = 4;
+                                break;
+                            case 2:
+                                _gifttype = 5;
+                                break;
+                            case 3:
+                                _gifttype = 1;
+                                break;
+                            case 4:
+                                _gifttype = 2;
+                                break;
+                            case 5:
+                                _gifttype = 8;
+                                break;
+                            case 6:
+                                _gifttype = 0;
+                                break;
+                            default:
+                                _gifttype = 0;
+                                break;
+                        }
+
+                        // 简介
+                        if (_gifttype == 99) {
+                            return;
+                        }
+                        ajaxService2({ method : 'book.get.gifts', bookid: _bookid, gifttype: _gifttype, index: _index, size: _count },
+                            function (response) {
+                                if (response.Code != 0) {
+                                    error = 1;
+                                } else {
+                                    datacount = response.Attachments.Total;
+                                    allgiftcount = response.Attachments.Sum;
+                                }
+
+                                if (datacount == 0 && _gifttype != 0) {
+                                    flag = 1;
+                                    ajaxService2({ method : 'book.get.gifts.other',  gifttype: _gifttype, count: _count },
+                                        function (response) {
+                                            if (response.Code != 0) {
+                                                error = 1;
+                                            }
+                                            setgift(response.Data, 1, 0, 0, _gifttype, error);
+                                        });
+                                } else {
+                                    setgift(response.Data, 0, datacount, allgiftcount, _gifttype, error);
+                                }
+                            });
+                    });
+            });
+
+            var setgift = function (res, flag, datacount, allgiftcount, gifttype, error) {
+
+                switch (gifttype) {
+                    case 4:
+                        if (error == 1) {
+                            $("#yuepiao").find(".loading2").html("加载时发生了错误");
+                            return;
+                        }
+                        if (res.length > 0) {
+                            var str = [];
+                            var title = datacount > 0 ? "本书目前收到月票<em>" + allgiftcount + "</em>张" : "目前还没有人投票<br/>大家都在给这些书投票";
+                            str.push('<div class="info3">');
+                            str.push('    <span class="tx3">' + title + '</span>');
+                            str.push('    <div class="line"></div>');
+                            str.push('    <div class="xlist">');
+                            for (var i = 0; i < res.length; i++) {
+                                var x = res[i];
+                                var strtime = new Date(x.Time).Format("yyyy-MM-dd");
+                                var s = flag == 1 ? "给《" + x.BookName + "》" : "";
+                                str.push('        <ul><li>[' + strtime + ']</li><li>' + x.UserName + ' ' + s + '投了' + x.Count + '票</li></ul>');
+                            }
+                            str.push('    </div>');
+                            str.push('    <ul class="group2 ww"><li><a href="javascript:sendProps(4);" class="button color1 r3">我要投票</a></li></ul>');
+                            str.push('</div>');
+                            $("#yuepiao").html(str.join(""));
+                        }
+                        break;
+
+                    case 5:
+                        if (error == 1) {
+                            $("#dashang").find(".loading2").html("加载时发生了错误");
+                            return;
+                        }
+                        if (res.length > 0) {
+                            var str = [];
+                            var title = datacount > 0 ? "本书目前收到打赏<em>" + allgiftcount + "</em>潇湘币" : "目前还没有人打赏<br/>大家都在给这些书打赏";
+                            str.push('<div class="info3">');
+                            str.push('    <span class="tx3">' + title + '</span>');
+                            str.push('    <div class="line"></div>');
+                            str.push('    <div class="xlist">');
+                            for (var i = 0; i < res.length; i++) {
+                                var x = res[i];
+                                var strtime = new Date(x.Time).Format("yyyy-MM-dd");
+                                var s = flag == 1 ? "给《" + x.BookName + "》" : "";
+                                str.push('        <ul><li>[' + strtime + ']</li><li>' + x.UserName + ' ' + s + '打赏了' + x.Count + '潇湘币</li></ul>');
+                            }
+                            str.push('    </div>');
+                            str.push('    <ul class="group2 ww"><li><a href="javascript:sendProps(5);" class="button color1 r3">我要打赏</a><li></ul>');
+                            str.push('</div>');
+                            $("#dashang").html(str.join(""));
+                        }
+
+                        break;
+
+                    case 1:
+                        if (error == 1) {
+                            $("#zuan").find(".loading2").html("加载时发生了错误");
+                            return;
+                        }
+                        if (res.length > 0) {
+                            var str = [];
+                            var title = datacount > 0 ? "本书目前收到钻石<em>" + allgiftcount + "</em>颗" : "目前还没有人送钻<br/>大家都在给这些书送钻";
+                            str.push('<div class="info3">');
+                            str.push('    <span class="tx3">' + title + '</span>');
+                            str.push('    <div class="line"></div>');
+                            str.push('    <div class="xlist">');
+                            for (var i = 0; i < res.length; i++) {
+                                var x = res[i];
+                                var strtime = new Date(x.Time).Format("yyyy-MM-dd");
+                                var s = flag == 1 ? "给《" + x.BookName + "》" : "";
+                                str.push('        <ul><li>[' + strtime + ']</li><li>' + x.UserName + ' ' + s + '送了' + x.Count + '颗</li></ul>');
+                            }
+                            str.push('    </div>');
+                            str.push('    <ul class="group2 ww"><li><a href="javascript:sendProps(1);" class="button color1 r3">我要送钻</a></li></ul>');
+                            str.push('</div>');
+                            $("#zuan").html(str.join(""));
+                        }
+                        break;
+
+                    case 2:
+                        if (error == 1) {
+                            $("#hua").find(".loading2").html("加载时发生了错误");
+                            return;
+                        }
+                        if (res.length > 0) {
+                            var str = [];
+                            var title = datacount > 0 ? "本书目前收到鲜花<em>" + allgiftcount + "</em>朵" : "目前还没有人送花<br/>大家都在给这些书送花";
+                            str.push('<div class="info3">');
+                            str.push('    <span class="tx3">' + title + '</span>');
+                            str.push('    <div class="line"></div>');
+                            str.push('    <div class="xlist">');
+                            for (var i = 0; i < res.length; i++) {
+                                var x = res[i];
+                                var strtime = new Date(x.Time).Format("yyyy-MM-dd");
+                                var s = flag == 1 ? "给《" + x.BookName + "》" : "";
+                                str.push('        <ul><li>[' + strtime + ']</li><li>' + x.UserName + ' ' + s + '送了' + x.Count + '朵</li></ul>');
+                            }
+                            str.push('    </div>');
+                            str.push('    <ul class="group2 ww"><li><a href="javascript:sendProps(2);" class="button color1 r3">我要送花</a></li></ul>');
+                            str.push('</div>');
+                            $("#hua").html(str.join(""));
+                        }
+                        break;
+
+                    case 8:
+                        if (error == 1) {
+                            $("#pingjia").find(".loading2").html("加载时发生了错误");
+                            return;
+                        }
+                        if (res.length > 0) {
+                            var str = [];
+                            var title = datacount > 0 ? "本书目前收到评价票<em>" + allgiftcount + "</em>张" : "目前还没有人投评价票<br/>大家都在给这些书投评价票";
+                            str.push('<div class="info3">');
+                            str.push('    <span class="tx3">' + title + '</span>');
+                            str.push('    <div class="line"></div>');
+                            str.push('    <div class="xlist">');
+                            for (var i = 0; i < res.length; i++) {
+                                var x = res[i];
+                                var strtime = new Date(x.Time).Format("yyyy-MM-dd");
+                                var s = flag == 1 ? "给《" + x.BookName + "》" : "";
+                                str.push('        <ul><li>[' + strtime + ']</li><li>' + x.UserName + ' ' + s + '投了' + x.Count + '票</li></ul>');
+                            }
+                            str.push('    </div>');
+                            str.push('    <ul class="group2 ww"><li><a href="javascript:sendProps(8);" class="button color1 r3">我要投票</a></li></ul>');
+                            str.push('</div>');
+                            $("#pingjia").html(str.join(""));
+                        }
+                        break;
+
+                    case 0:
+                        if (error == 1) {
+                            $("#fensi").find(".loading2").html("加载时发生了错误");
+                            return;
+                        }
+                        var fanscount = @Model.Book.Fans;
+                        //if (res.length > 0) {
+                        var show01 = fanscount == 0 ? "block" : "none";
+                        var show02 = fanscount == 0 ? "none" : "block";
+                        var str = [];
+                        var title = fanscount == 0 ? "目前还没粉丝,马上成为第一位粉丝吧!" : "目前有粉丝<em>" + fanscount + "</em>个";
+                        str.push('<div class="info3">');
+                        str.push('    <span class="tx3">' + title + '</span>');
+                        str.push('    <div class="line"></div>');
+                        str.push('    <div style="color:#666; font-size:14px; padding:5px 0; line-height:180%; display:' + show01 + '">');
+                        str.push('       你可通过以下方式获取粉丝值：<br>1、订阅VIP章节<br>2、赠送钻石、鲜花、打赏<br>3、投评价票、投月票');
+                        str.push('    </div>');
+                        str.push('    <div class="xlist" style="display:' + show02 + '">');
+                        for (var i = 0; i < res.length; i++) {
+                            var x = res[i];
+                            var strtime = new Date(x.Time).Format("yyyy-MM-dd");
+                            var s01 = "";
+                            var s02 = "";
+                            if (x.Type == 5) { s01 = "赏了"; s02 = "潇湘币"; }
+                            if (x.Type == 2) { s01 = "送了"; s02 = "朵鲜花"; }
+                            if (x.Type == 1) { s01 = "送了"; s02 = "颗钻石"; }
+                            if (x.Type == 4) { s01 = "投了"; s02 = "张月票"; }
+                            if (x.Type == 8) { s01 = "投了"; s02 = "张评价票"; }
+                            str.push('        <ul><li>[' + strtime + ']</li><li>' + x.UserName + s01 + x.Count + s02 + '</li></ul>');
+                        }
+                        str.push('    </div>');
+                        str.push('</div>');
+                        $("#fensi").html(str.join(""));
+                        //}
+                        break;
+                    default:
+                        break;
+                }            
+            }
+    </script>
+</body>
+</html>

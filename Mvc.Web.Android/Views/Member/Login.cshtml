@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "用户登陆";
+}
+
+@section styles{
+    @Styles.Render("~/Css/base.css")
+    @Styles.Render("~/Css/site.css")
+}
+
+<article class="login-wrapper">
+    <div class="login-wrapper-inputs radius5">
+        <input id="txtName" type="text" name="name" placeholder="手机号/潇湘账号" onclick="if (this.value == '') this.value = ''" />
+        <input id="txtPassword" type="password" name="password" placeholder="登录密码" />
+    </div>
+    <ul class="input-groups">
+        <li><a id="submit" class="button margin-top10 radius5">登录</a></li>
+        <li><a id="register" class="button button-style-1 radius5">注册账号</a></li>
+        <li class="text-right"><a id="findPassword" class="forgot">忘记密码？</a></li>
+    </ul>
+    <div class="hr">
+        <strong>使用其它登录方式</strong>
+    </div>
+    <section class="login-other">
+        <a id="qqAuthorize" class="icon-login-qq"></a>
+    </section>
+</article>
+
+@section scripts{
+    <script type="text/javascript">
+        // 来路URL
+        var _referer = "@ViewBag.RefererUrl";
+        // 初始化
+        $(function () {
+
+            $('#submit').click(
+                function () {
+
+                    var userName = $("#txtName").val();
+                    var userPass = $("#txtPassword").val();
+
+                    if (userName == '' ||
+                        userPass == '') {
+                        Util.Alert('用户名和密码不能为空');
+                        return;
+                    }
+
+                    $("#submit").html("正在登录......");
+
+                    ajaxLocalService('user_login', { username: userName, userpassword: userPass },
+                        function (responseData) {
+
+                            $("#submit").html("登录");
+
+                            if (responseData.Code != 0) {
+                                Util.Alert(responseData.Message);
+                                return;
+                            }
+
+                            if (_referer != "") {
+                                location.href = _referer;
+                            }
+                        });
+                });
+
+            $("#register").click(
+                function () {
+                    location.href = "/Member/Register?referer=" + _referer;
+                });
+
+            $("#findPassword").click(
+                function () {
+                    location.href = "/Member/FindPassword?referer=" + _referer;
+                });
+
+            $("#qqAuthorize").click(
+                function () {
+                    location.href = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100389624&state=mxxsynet&scope=get_user_info&redirect_uri=" + encodeURI("http://android.xxsy.net/Pages2/QQAuthorizeLogin.aspx");
+                    Util.CookieWrite("QQ_LOGIN_RETURN_LINK", _referer, 999);
+                });
+
+        });
+
+    </script>
+}

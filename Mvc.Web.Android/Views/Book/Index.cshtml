@@ -1,0 +1,237 @@
+﻿@using Mvc.Web.Android.Models.Book;
+@{
+    ViewBag.Title = "潇湘精品";
+    var _count1 = 6;
+    var _count2 = 5;
+    var _maxcount = 100;
+}
+
+@section styles{
+    <style>
+        #m-slider { position: relative; left: 0; width: 2000%; }
+            #m-slider li { float: left; width: 5%; height: 2rem; overflow: hidden; }
+            #m-slider img { display: block; width: 100%; vertical-align: top; }
+        #icons { text-align: center; color: #000; position: relative; z-index: 999; margin-top: -1.15rem; }
+            #icons span { background: #fff; border-radius: 0.1rem; box-shadow: 0 0 2px #b0b0b0 inset; display: inline-block; height: 0.15rem; margin: 0 0.05rem; overflow: hidden; text-indent: -99em; width: 0.15rem; }
+            #icons .curr { background: #f80; box-shadow: 0 0 2px #f60 inset; }
+    </style>
+}
+
+@*<div class="banner">
+    <img width="100%" src="http://images.xxsy.net/mxxsynet/jingxuan.jpg" style="border: none;">
+</div>*@
+
+<div class="banner" id="slider">
+    <div class="banner">
+        <ul id="m-slider" class="cnt">
+            <li class="select"><a href="/mianfei">
+                <img src="~/Content/images/shouye_1.png" alt="" /></a></li>
+            <li><a href="/">
+                <img src="~/Content/images/shouye_2.png" alt="" /></a></li>
+            <li><a href="/Member/login">
+                <img src="~/Content/images/shouye_3.png" alt="" /></a></li>
+            <li><a href="@Url.Action("ZhuanTi", "Book")">
+                <img src="~/Content/images/shouye_4.png" alt="" /></a></li>
+        </ul>
+    </div>
+    <div id="icons" class="icons"><span class="curr">1</span><span>2</span><span>3</span><span>4</span></div>
+</div>
+
+<div class="note">签到送元宝，免费看VIP章节</div>
+<!-- 潇湘精品内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>潇湘精品</h1>
+        <p class="tit_more"><a href="@Url.Action("MoreJingPin", "Book", new { type = (int)RecommendClass.Fine })">更多</a></p>
+    </div>
+    @Html.Action("GetEffectRecommend", "Book", new { count = _count1, maxcount = _maxcount, recommendType = (int)RecommendClass.Fine })
+</div>
+<!-- 精彩专区内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>精彩专区</h1>
+    </div>
+    <ul class="zhuanqu">
+        <li><a href="@Url.Action("ZhuanTi", "Book")">
+            <img src="~/Content/images/SpecialMagic.png" alt="专题女魔" /></a></li>
+        <li><a href="javascript:;">
+            <img src="~/Content/images/World.png" alt="现世界" /></a></li>
+    </ul>
+</div>
+<!-- 热门完结内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>热门完结</h1>
+        <p class="tit_more"><a href="@Url.Action("MoreJingPin", "Book", new { type = (int)RecommendClass.Finished, sort = (int)SearchSort.VipSameDay_Desc })">更多</a></p>
+    </div>
+    @Html.Action("GetEffectRecommend", "Book", new { count = _count1, maxcount = _maxcount, recommendType = (int)RecommendClass.Finished })
+</div>
+<!-- 猜你喜欢内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>猜你喜欢</h1>
+        <p class="tit_more"><a href="@Url.Action("GuessLike", "Book")">更多</a></p>
+    </div>
+    @Html.Action("GetEffectImg", "Book", new { count = _count1, effecttype = 291 })
+</div>
+<!-- 古代推荐内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>古代推荐</h1>
+        <p class="tit_more"><a href="@Url.Action("MoreJingPin", "Book", new { type = (int)RecommendClass.Ancient })">更多</a></p>
+    </div>
+    @Html.Action("GetEffectRecommend", "Book", new { count = _count1, maxcount = _maxcount, recommendType = (int)RecommendClass.Ancient })
+</div>
+<!-- 现代推荐内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>现代推荐</h1>
+        <p class="tit_more"><a href="@Url.Action("MoreJingPin", "Book", new { type = (int)RecommendClass.Modern })">更多</a></p>
+    </div>
+    @Html.Action("GetEffectRecommend", "Book", new { count = _count1, maxcount = _maxcount, recommendType = (int)RecommendClass.Modern })
+</div>
+<!-- 玄幻推荐内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>玄幻推荐</h1>
+        <p class="tit_more"><a href="@Url.Action("MoreJingPin", "Book", new { type = (int)RecommendClass.Occult })">更多</a></p>
+    </div>
+    @Html.Action("GetEffectRecommend", "Book", new { count = _count1, maxcount = _maxcount, recommendType = (int)RecommendClass.Occult })
+</div>
+<!-- 包月特价内容 -->
+<div class="item_box" id="baoyue">
+    <div class="item_title">
+        <h1>包月特价</h1>
+        <p class="tit_more"><a href="@Url.Action("MianFei", "Book")">更多</a></p>
+    </div>
+    <strong>无限制享受700+部优秀作品，最低¥8.3元/月起！</strong>
+    <div class="tab">
+        <ul class="tabs">
+            <li><a href="javascript:;" class="current">包月</a><a href="javascript:;">1/本</a><a href="javascript:;">3/本</a></li>
+        </ul>
+        <div class="tab_content">
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 291 })
+            </div>
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 291 })
+            </div>
+            <div class="tabs_item">
+                @Html.Action("GetEffectRecommendNoImg", "Book", new { count = _count2, effecttype = 291 })
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 免费专区内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>免费专区</h1>
+        <p class="tit_more"><a href="@Url.Action("MianFei", "Book")">更多</a></p>
+    </div>
+    @Html.Action("GetEffectRecommend", "Book", new { count = _count1, maxcount = _maxcount, recommendType = (int)RecommendClass.Free })
+</div>
+<!-- 出版精品内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>出版精品</h1>
+        <p class="tit_more"><a href="@Url.Action("Publish", "Book")">更多</a></p>
+    </div>
+    @Html.Action("GetEffectImg", "Book", new { count = _count1, effecttype = 291 })
+</div>
+<!-- 更多精彩内容 -->
+<div class="item_box">
+    <div class="item_title">
+        <h1>更多精彩</h1>
+    </div>
+    <ul class="zhuanqu">
+        <li><a href="javascript:;">
+            <img name="" src="" alt="潇湘神殿" /></a></li>
+        <li><a href="javascript:;">
+            <img name="" src="" alt="作者福利" /></a></li>
+    </ul>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/index.js")
+
+    <script>
+        $(document).ready(function () {
+            (function ($) {
+                //首页广告滑动
+                var _sliderElement = document.querySelector("#slider");
+                var $slider = $('#m-slider');
+                var $icons = $('#icons');
+                var _li = $slider.children('li');
+                var _liWidth = _li.width();
+                var _liSize = _li.size();
+                $slider.append(_li.first().clone());
+                var _ox, _mx, _sumx, _scrollx, _index = 0, _isClick = false, _isMove = true;
+
+                _sliderElement.addEventListener('touchstart', function (event) {//点击轮播区域
+                    if (timer) {
+                        clearInterval(timer);
+                        timer = null;
+                    }
+
+                    _isMove = true;//初始化拖拽,状态为true,可以触发点击事件
+                    _sumx = 0;//初始化鼠标偏移为0
+                    _isClick = true;//记录左键状态
+                    _ox = event.touches[0].pageX;//记录鼠标初始坐标
+                    _scrollx = $slider.parent().scrollLeft();//记录初始轮播水平滚动偏移
+                    event.preventDefault();//阻止鼠标点击默认事件
+                });
+
+                _sliderElement.addEventListener('touchmove', function (event) {//在轮播区域移动
+                    if (_isClick) {//点击状态
+                        _isMove = false;//已经拖拽,状态为false,不再触发点击事件
+                        _mx = event.touches[0].pageX;//记录实时坐标
+                        _sumx = _ox - _mx;//记录坐标偏移
+                        $slider.parent().scrollLeft(_scrollx + _sumx);
+                    }
+                });
+                _sliderElement.addEventListener('touchend', function (event) {//点击释放,完成click事件
+                    timer = setInterval(function () {
+                        setSlider();
+                    }, 5000);
+
+                    _isClick = false;//释放点击状态
+                    if (_isMove) {//没有拖拽或者拖拽失效,触发点击事件
+                        window.location.href = $slider.find('.select').children().attr('href');//触发点击事件
+                    } else if (!_isMove) {//成功拖拽
+                        _sumx > 0 && _index < _liSize && _index++;//下一个
+                        _sumx < 0 && _index > 0 && _index--;//上一个
+                        $slider.parent().stop().animate({ scrollLeft: _index * _liWidth }, 300, function () {
+                            if (_index == _liSize) {//最后一个
+                                _index = 0;
+                                $slider.parent().scrollLeft(0);//归位
+                            }
+                            $icons.find('.curr').removeClass('curr').end().children().eq(_index).addClass('curr');
+                            $slider.find('.select').removeClass('select').end().children().eq(_index).addClass('select');
+                        });//完成拖拽
+                    }
+                });
+
+                function setSlider() {
+                    _index < _liSize && _index++;//下一个
+                    $slider.parent().stop().animate({ scrollLeft: _index * _liWidth }, 300, function () {
+                        if (_index == _liSize) {//最后一个
+                            _index = 0;
+                            $slider.parent().scrollLeft(0);
+                        }
+                        $icons.find('.curr').removeClass('curr').end().children().eq(_index).addClass('curr');
+                        $slider.find('.select').removeClass('select').end().children().eq(_index).addClass('select');
+                    });//完成拖拽
+                }
+                var timer = setInterval(function () {
+                    setSlider();
+                }, 5000);
+
+                $(window).resize(function () {
+                    _liWidth = _li.width();
+                    $slider.parent().scrollLeft(_index * _liWidth);//归位
+                });
+            })(jQuery);
+        });
+
+    </script>
+}

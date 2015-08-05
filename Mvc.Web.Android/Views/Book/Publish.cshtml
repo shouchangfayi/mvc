@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "出版页";
+}
+@section styles{
+    @Styles.Render("~/Content/css/css.css")
+    @Styles.Render("~/Content/css/floatbtn.css")
+}
+<div class="item_box" id="orderlist">
+    <div class="tab_content">
+        <div class="item_list" id="books">
+        </div>
+    </div>
+    <a id="lnkMore" class="nomorelist" onclick="getNextBook();">
+        <p>点击查看更多</p>
+    </a>
+</div>
+<!-- 浮动区  -->
+<div class="floatbox">
+    <div class="up"><a href="javascript:;" class="floatbtn btn_up" id="_goTop">&nbsp;</a></div>
+    <div class="rightbtn">
+        <ul>
+            <li><a href="javascript:;" class="floatbtn">即将出版</a></li>
+            <li><a href="javascript:;" class="floatbtn current">已出版</a></li>
+        </ul>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script>
+        var _sort = $(".rightbtn .current").attr("data-sort");
+        var _isLoading = 0, _index = 0, _size = 10;
+        var _timer;
+        var _books = [];
+        var _bookindex = $(".rightbtn .current").attr("data-index");
+        $(".rightbtn a").each(function(){
+            _books.push({ index : 0, nomore: false, items : [] });
+        });
+        _books[_bookindex].index = 1;
+
+        var getBooks = function (callback) {
+            $.get('@Url.Action("GetPublishView", "Book")', $.param({ type: _type, sort : _sort, index: _index, size: _size }),
+                function (response) {
+                    _isLoading = 0;
+                    
+                    _books[_bookindex].index = _index;
+                    if (response != "") {
+                        _books[_bookindex].items.push(response);
+                        $("#books").append(response);
+                        if ($(".pic_txt[data-total]").length > 0) {
+                            _books[_sortIndex][_cidIndex].nomore = true;
+                            $("#lnkMore > p").addClass("nomore").html("没有更多了！");
+                        }
+                    }
+                    else{
+                        _books[_bookindex].nomore = true;
+                        $("#lnkMore > p").addClass("nomore").html("没有更多了！");
+                    }
+
+                    if (typeof callback == "function")
+                        callback();
+                });
+        };
+
+        var getNextBook = function () {
+            if (_isLoading == 1) return;
+            if(_books[_bookindex].nomore) return;
+            _isLoading = 1;
+            _index++;
+            $("#lnkMore > p").addClass("ldg").html("正在加载...");
+            getBooks(function () {
+                if(_books[_bookindex].nomore) {
+                    $("#lnkMore > p").removeClass("ldg").html("没有更多了！");
+                } else {
+                    $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                }
+
+                _isLoading = 0;
+            });
+        }
+
+        var _timer = setInterval(function () {
+            if (_isLoading == 1) return;
+            if ($(window).height() + $(window).scrollTop() > $("#lnkMore > p").offset().top) {
+                if (!_books[_bookindex].nomore && _index < 6) {
+                    getNextBook();
+                }
+            }
+        }, 200);
+
+        $(function(){
+            $("#_goTop").click(function () {
+                $("body").animate({ scrollTop: 0 }, 200);
+            });
+
+            $(".rightbtn a").click(function(){
+                if (_isLoading == 1) return;
+                //$("body").scrollTop(0);
+                $(".rightbtn a").removeClass("current");
+                $(this).addClass("current");
+                _sort = $(".rightbtn .current").attr("data-sort");
+                _bookindex = $(this).attr("data-index");
+                _index = _books[_bookindex].index;
+                $("#books").html(_books[_bookindex].items.join(""));
+                if (_books[_bookindex].nomore == true) {
+                    $("#lnkMore > p").addClass("nomore").html("没有更多了！");
+                } else {
+                    $("#lnkMore > p").removeClass("nomore").html("点击查看更多");
+                }
+
+                if (_index == 0 && _books[_bookindex].items.length == 0) {
+                    _isLoading = 1;
+                    $("#lnkMore > p").addClass("ldg").html("正在加载...");
+                    //Util.Loading();
+                    getBooks(function () {
+                        _isLoading = 0;
+                        if(_books[_bookindex].nomore) {
+                            $("#lnkMore > p").removeClass("ldg").html("没有更多了！");
+                        } else {
+                            $("#lnkMore > p").removeClass("ldg").html("点击查看更多");
+                        }
+                        //Util.LoadingClear();
+                    });
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,16 @@
+﻿@{
+    Layout = null;
+}
+@{
+    var List = Model;
+
+    if (List != null && List.Count > 0)
+    {
+    <ul class="item_list">
+        @for (int i = 0; i < List.Count; i++)
+        {
+            <li><span class="category _@(List[i].ClassId)">@(List[i].ClassName)</span><a href="/Info_OLD?bookid=@(List[i].Id)">@(List[i].Title)</a><span class="author">@(List[i].AuthorName)</span></li>
+        }
+    </ul>
+    }
+}
